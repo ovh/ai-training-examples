@@ -13,11 +13,8 @@ app = Flask(__name__)
 RESULT_FOLDER = os.path.join('static')
 app.config['RESULT_FOLDER'] = RESULT_FOLDER
 
-model_yolov5s = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True).autoshape() 
-model_yolov5s.eval()
-
-model_yolov5m = torch.hub.load('ultralytics/yolov5', 'yolov5m', pretrained=True).autoshape() 
-model_yolov5m.eval()
+model_yolov5s = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5s1.pt')  # default
+model_yolov5m = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5m1.pt')  # default
 
 # yolov5s
 def get_prediction_yolov5s(img_bytes):
