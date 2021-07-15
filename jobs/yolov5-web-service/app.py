@@ -13,6 +13,7 @@ app = Flask(__name__)
 RESULT_FOLDER = os.path.join('static')
 app.config['RESULT_FOLDER'] = RESULT_FOLDER
 
+# the files yolov5s1.pt and yolov5m1.pt are located in the /models folder
 model_yolov5s = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5s1.pt')  # default
 model_yolov5m = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5m1.pt')  # default
 
@@ -32,10 +33,12 @@ def get_prediction_yolov5m(img_bytes):
     results = model_yolov5m(imgs, size=640) 
     return results
 
+# get method
 @app.route('/', methods=['GET'])
 def get():
     return render_template('index.html')
 
+# post method
 @app.route('/', methods=['POST'])
 def predict():
     print(f'User selected model : {request.form.get("model_choice")}')
