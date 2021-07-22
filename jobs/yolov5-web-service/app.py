@@ -3,7 +3,7 @@ import os
 import shutil
 import json
 from PIL import Image
-
+import cv2
 import torch
 import flask
 from flask import Flask, jsonify, url_for, render_template, request, redirect
