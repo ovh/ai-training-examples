@@ -1,7 +1,7 @@
 # Choose your base image
 FROM python:3.8
 # Install your dependencies
-RUN pip install streamlit pandas
+RUN pip install streamlit pandas numpy
 # Install your application
 COPY simple_app.py /opt/simple_app.py
 # Define your default launching command
