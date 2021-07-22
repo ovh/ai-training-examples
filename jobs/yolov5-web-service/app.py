@@ -18,7 +18,7 @@ model_yolov5m = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolo
 def get_prediction_yolov5s(img_bytes):
     img = Image.open(io.BytesIO(img_bytes))
     imgs = [img]  # batched list of images
-    # Inference
+    # inference
     results = model_yolov5s(imgs, size=640) 
     return results
 
@@ -26,7 +26,7 @@ def get_prediction_yolov5s(img_bytes):
 def get_prediction_yolov5m(img_bytes):
     img = Image.open(io.BytesIO(img_bytes))
     imgs = [img]  # batched list of images
-    # Inference
+    # inference
     results = model_yolov5m(imgs, size=640) 
     return results
 
@@ -47,14 +47,19 @@ def predict():
         return
     
     img_bytes = file.read()
+    
+    # choice of the model
     if request.form.get("model_choice") == 'yolov5s':
         results = get_prediction_yolov5s(img_bytes)
     if request.form.get("model_choice") == 'yolov5m':
         results = get_prediction_yolov5m(img_bytes)
     
-    results.render()  # updates results.imgs with boxes and labels
+    # updates results.imgs with boxes and labels
+    results.render()  
     
+    # encode the resulting image and return it
     for img in results.imgs:
+        RGB_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         im_arr = cv2.imencode('.jpg', img)[1]
         response = make_response(im_arr.tobytes())
         response.headers['Content-Type'] = 'image/jpeg'
