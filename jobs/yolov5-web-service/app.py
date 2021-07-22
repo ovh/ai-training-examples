@@ -10,9 +10,6 @@ from flask import Flask, jsonify, url_for, render_template, request, redirect
 
 app = Flask(__name__)
 
-RESULT_FOLDER = os.path.join('static')
-app.config['RESULT_FOLDER'] = RESULT_FOLDER
-
 # the files yolov5s1.pt and yolov5m1.pt are located in the /models folder
 model_yolov5s = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5s1.pt')  # default
 model_yolov5m = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5m1.pt')  # default
@@ -54,11 +51,14 @@ def predict():
         results = get_prediction_yolov5s(img_bytes)
     if request.form.get("model_choice") == 'yolov5m':
         results = get_prediction_yolov5m(img_bytes)
-    results.save("static/")  # save the results
-
-
-    full_filename = os.path.join(app.config['RESULT_FOLDER'], 'image0.jpg')
-    return redirect('static/image0.jpg')
+    
+    results.render()  # updates results.imgs with boxes and labels
+    
+    for img in results.imgs:
+        im_arr = cv2.imencode('.jpg', img)[1]
+        response = make_response(im_arr.tobytes())
+        response.headers['Content-Type'] = 'image/jpeg'
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0')
