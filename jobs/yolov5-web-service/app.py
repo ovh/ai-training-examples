@@ -1,33 +1,29 @@
 import io
-import os
-import shutil
-import json
 from PIL import Image
 import cv2
 import torch
-import flask
-from flask import Flask, jsonify, url_for, render_template, request, redirect
+from flask import Flask, render_template, request, make_response
+from werkzeug.exceptions import BadRequest
 
+# creating flask app
 app = Flask(__name__)
 
 # the files yolov5s1.pt and yolov5m1.pt are located in the /models folder
-model_yolov5s = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5s1.pt')  # default
-model_yolov5m = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5m1.pt')  # default
+model_yolov5s = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5s1.pt', force_reload=True)  # default
+model_yolov5m = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5m1.pt', force_reload=True)  # default
 
 # yolov5s
 def get_prediction_yolov5s(img_bytes):
     img = Image.open(io.BytesIO(img_bytes))
-    imgs = [img]  # batched list of images
     # inference
-    results = model_yolov5s(imgs, size=640) 
+    results = model_yolov5s(img, size=640)  
     return results
 
 # yolov5m
 def get_prediction_yolov5m(img_bytes):
     img = Image.open(io.BytesIO(img_bytes))
-    imgs = [img]  # batched list of images
     # inference
-    results = model_yolov5m(imgs, size=640) 
+    results = model_yolov5m(img, size=640) 
     return results
 
 # get method
@@ -38,14 +34,7 @@ def get():
 # post method
 @app.route('/', methods=['POST'])
 def predict():
-    print(f'User selected model : {request.form.get("model_choice")}')
-
-    if 'file' not in request.files:
-        return redirect(request.url)
-    file = request.files.get('file')
-    if not file:
-        return
-    
+    file = extract_img(request)
     img_bytes = file.read()
     
     # choice of the model
@@ -54,10 +43,12 @@ def predict():
     if request.form.get("model_choice") == 'yolov5m':
         results = get_prediction_yolov5m(img_bytes)
     
-    # updates results.imgs with boxes and labels
-    results.render()  
+    print(f'User selected model : {request.form.get("model_choice")}')
     
-    # encode the resulting image and return it
+    # updates results.imgs with boxes and labels
+    results.render()
+    
+    # encoding the resulting image and return it
     for img in results.imgs:
         RGB_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         im_arr = cv2.imencode('.jpg', RGB_img)[1]
@@ -65,5 +56,17 @@ def predict():
         response.headers['Content-Type'] = 'image/jpeg'
     return response
 
+def extract_img(request):
+    # checking if image uploaded is valid
+    if 'file' not in request.files:
+        raise BadRequest("Missing file parameter!")
+
+    file = request.files['file']
+    if file.filename == '':
+        raise BadRequest("Given file is invalid")
+    
+    return file
+    
 if __name__ == '__main__':
+    # starting app
     app.run(debug=True,host='0.0.0.0')
