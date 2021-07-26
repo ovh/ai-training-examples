@@ -9,8 +9,8 @@ from werkzeug.exceptions import BadRequest
 app = Flask(__name__)
 
 # the files yolov5s1.pt and yolov5m1.pt are located in the /models folder
-model_yolov5s = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5s1.pt', force_reload=True)  # default
-model_yolov5m = torch.hub.load('ultralytics/yolov5', 'custom', path='models/yolov5m1.pt', force_reload=True)  # default
+model_yolov5s = torch.hub.load('ultralytics/yolov5', 'custom', path='models_train/yolov5s_100epochs.pt', force_reload=True)  # default
+model_yolov5m = torch.hub.load('ultralytics/yolov5', 'custom', path='models_train/yolov5m_100epochs.pt', force_reload=True)  # default
 
 # yolov5s
 def get_prediction_yolov5s(img_bytes):
