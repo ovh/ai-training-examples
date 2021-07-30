@@ -22,9 +22,7 @@ Launch the following **docker command** to launch your application locally on yo
 docker run --rm -it -p 5000:5000 --user=42420:42420 yolov5_web:latest
 ```
 
-> [!primary]
->
-> The `-p 5000:5000` argument indicates that you want to execute a port rediction from the port **5000** of your local machine into the port **5000** of the docker container. The port **5000** is the default port used by **Flask** applications.
+> :heavy_exclamation_mark: The `-p 5000:5000` argument indicates that you want to execute a port rediction from the port **5000** of your local machine into the port **5000** of the docker container. The port **5000** is the default port used by **Flask** applications.
 >
 
 
@@ -67,17 +65,11 @@ The following command starts a new job running your Flask application:
 ovhai job run --default-http-port 5000 --cpu 4 <shared-registry-address>/yolov5_web:latest
 ```
 
-> [!primary]
->
-> `--default-http-port 5000` indicates that the port to reach on the job url is the `5000`.
+> :heavy_exclamation_mark: `--default-http-port 5000` indicates that the port to reach on the job url is the `5000`.
 >
 
-> [!primary]
->
-> `--cpu 4` indicates that we request 4 cpu for that job.
+> :heavy_exclamation_mark: `--cpu 4` indicates that we request 4 cpu for that job.
 >
 
-> [!primary]
->
-> Consider adding the `--unsecure-http` attribute if you want your application to be reachable without any authentication.
+> :heavy_exclamation_mark: Consider adding the `--unsecure-http` attribute if you want your application to be reachable without any authentication.
 >
