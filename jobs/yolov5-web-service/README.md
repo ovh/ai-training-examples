@@ -27,9 +27,8 @@ docker run --rm -it -p 5000:5000 --user=42420:42420 yolov5_web:latest
 > The `-p 5000:5000` argument indicates that you want to execute a port rediction from the port **5000** of your local machine into the port **5000** of the docker container. The port **5000** is the default port used by **Flask** applications.
 >
 
-> [!warning]
->
-> Don't forget the `--user=42420:42420` argument if you want to simulate the exact same behavior that will occur on **AI TRAINING jobs**. It executes the docker container as the specific OVHcloud user (user **42420:42420**).
+
+> :warning: Don't forget the `--user=42420:42420` argument if you want to simulate the exact same behavior that will occur on **AI TRAINING jobs**. It executes the docker container as the specific OVHcloud user (user **42420:42420**).
 >
 
 Once started, your application should be available on http://localhost:5000.
@@ -37,9 +36,7 @@ Once started, your application should be available on http://localhost:5000.
 
 ## Push the image into the shared registry
 
-> [!warning]
->
-> The shared registry of AI Training should only be use for testing purpose. Please consider attaching your own docker registry. More information about this can be found [here][OVH Add private registry].
+> :warning: The shared registry of AI Training should only be use for testing purpose. Please consider attaching your own docker registry. More information about this can be found [here][OVH Add private registry].
 >
 
 Find the adress of your shared registry by launching this command:
