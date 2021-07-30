@@ -7,7 +7,7 @@ The purpose of this tutorial is to show how to deploy a web service for YOLOv5 u
 
 First, the tree structure of your folder should be as follows.
 
-![image](images_readme/tree_yolov5_web_service.png){.thumbnail}
+![image](tree_yolov5_web_service.png)
 
 First, you have to create the folder named `models_train` and this is where you can store the weights generated after your trainings. You are free to put as many weight files as you want in the `models_train` folder.
 
