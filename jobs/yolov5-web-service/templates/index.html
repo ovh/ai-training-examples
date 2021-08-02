@@ -33,8 +33,9 @@
 				<div style= "height:40px"></div>
 				<h5>Select YOLOv5 model (2 are available) </h5>
 				<select name="model_choice">
-   				<option value="yolov5s">YOLOv5s</option>
-   				<option value="yolov5m">YOLOv5m</option>
+				{%for i in range(0, len)%}
+				    <option>{{listOfKeys[i]}}</option>
+				{%endfor%}
 				</select>
 				<div style= "height:50px"></div>
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
