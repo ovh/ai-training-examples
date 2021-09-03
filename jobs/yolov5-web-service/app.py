@@ -86,5 +86,7 @@ if __name__ == '__main__':
         for key in dictOfModels :
             listOfKeys.append(key) # put all the keys in the listOfKeys
 
+    print(f'Server now running on {os.environ["JOB_URL_SCHEME"]}{os.environ["JOB_ID"]}.{os.environ["JOB_HOST"]}')
+
     # starting app
     app.run(debug=True,host='0.0.0.0')
