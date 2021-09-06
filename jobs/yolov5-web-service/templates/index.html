@@ -49,7 +49,7 @@
 		<script type="text/javascript">
 			$('#inputfile').bind('change', function() {
 				let fileSize = this.files[0].size/1024/1024; // this gives in MB
-				if (fileSize > 1) {
+				if (fileSize > 10) {
 					$("#inputfile").val(null);
 					alert('file is too big. images more than 1MB are not allowed')
 					return
