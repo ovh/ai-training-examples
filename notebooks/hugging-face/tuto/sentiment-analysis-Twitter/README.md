@@ -37,7 +37,7 @@ Tweets are divided into 5 classes, from 1 to 5 stars, according to their sentime
 
 ![BERT_results](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/BERT/results-bert.png)
 
-### Models comparaison
+## Comparison of models performance
 
 Previously, we have tested 3 Hugging Face models based on BARThez, BERT and camemBERT. Two of them can be compared on our dataset: **BARThez** and **CamemBERT**.
 
