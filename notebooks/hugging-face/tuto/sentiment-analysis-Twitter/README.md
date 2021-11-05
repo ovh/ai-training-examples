@@ -11,6 +11,7 @@ We will compare 3 different [Hugging Face](https://huggingface.co/) models:
 - model based on [BARThez](https://huggingface.co/transformers/model_doc/barthez.html): [barthez-sentiment-classification](https://huggingface.co/moussaKam/barthez)
 - model based on [BERT](https://huggingface.co/transformers/model_doc/bert.html): [bert-base-multilingual-uncased-sentiment](https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment)
 
+## Sentiment Analysis
 
 ### Sentiment Analysis with pt-tblard-tf-allocine
 
@@ -35,3 +36,23 @@ Tweets are divided into 2 classes according to their sentiment: **positive** or 
 Tweets are divided into 5 classes, from 1 to 5 stars, according to their sentiment: 1 star corresponds to a **very negative** tweet while 5 stars corresponds to a **very positive** tweet.
 
 ![BERT_results](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/BERT/results-bert.png)
+
+### Models comparaison
+
+Previously, we have tested 3 Hugging Face models based on BARThez, BERT and camemBERT. Two of them can be compared on our dataset: **BARThez** and **CamemBERT**.
+
+It is possible to **process our data manually** and **compare our results** with the predictions of the models. Then, we will be able to display the success rate of the models to see which one was the best on our dataset.
+
+The confusion matrix will also give us information about false positives or false negatives.
+
+### Consufion matrix - BARThez x reel sentiments
+
+![BARThez_matrix](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/BARThez/confusion-matrix-barthez.png)
+
+Success rate:
+
+### Consufion matrix - CamemBERT x reel sentiments
+
+![CamemBERT_matrix](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/CamemBERT/confusion-matrix-camembert.png)
+
+Success rate:
