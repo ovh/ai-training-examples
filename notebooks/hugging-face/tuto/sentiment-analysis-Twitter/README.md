@@ -49,10 +49,10 @@ The confusion matrix will also give us information about false positives or fals
 
 ![BARThez_matrix](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/BARThez/confusion-matrix-barthez.png)
 
-Success rate:
+Success rate: 87.02 %
 
 ### Consufion matrix - CamemBERT x reel sentiments
 
 ![CamemBERT_matrix](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/CamemBERT/confusion-matrix-camembert.png)
 
-Success rate:
+Success rate: 78.63 %
