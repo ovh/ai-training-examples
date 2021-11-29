@@ -4,7 +4,7 @@ The aim of this tutorial is to use NLP to analyse sentiments on Tweets.
 
 **USE CASE**: all OVHcloud Tweets posted on *October 16, 2021*, i.e. 1 day after the company's IPO and 3 days after the incident.
 
-The NLP allows us to show the sentiment the Tweets according to their topic.
+The NLP allows us to show the Tweets sentiments according to their topic.
 
 We will compare 3 different [Hugging Face](https://huggingface.co/) models:
 - model based on [camemBERT](https://huggingface.co/transformers/model_doc/camembert.html): [pt-tblard-tf-allocine](https://huggingface.co/philschmid/pt-tblard-tf-allocine)
