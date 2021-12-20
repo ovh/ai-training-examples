@@ -8,10 +8,6 @@ First, the tree structure of your folder should be as follows.
 
 ![image](tree-flask-app.png)
 
-First, you have to create the folder named `models_train` and this is where you can store the weights generated after your trainings. You are free to put as many weight files as you want in the `models_train` folder.
-
-**Then you can use the code above !**
-
 ### Build the Docker image from the Dockerfile
 
 Launch the following command from the **Dockerfile** directory to build your application image:
