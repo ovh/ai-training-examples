@@ -1,6 +1,6 @@
 # Deploy a simple app with Flask
 
-The purpose of this tutorial is to show how to deploy a web service for YOLOv5 using your own weights generated after training a YOLOv5 model on your dataset.
+The purpose of this tutorial is to show how to deploy a simple app with **Flask**.
 
 ## Instructions before using code
 
