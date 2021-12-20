@@ -27,7 +27,7 @@ docker build . -t flask-app:latest
 
 > [!primary]
 >
-> The `-t` argument allows you to choose the identifier to give to your image. Usually image identifiers are composed of a **name** and a **version tag** `<name>:<version>`. For this example we chose **flask-api:latest**.
+> The `-t` argument allows you to choose the identifier to give to your image. Usually image identifiers are composed of a **name** and a **version tag** `<name>:<version>`. For this example we chose **flask-app:latest**.
 >
 
 ### Test it locally (optional)
