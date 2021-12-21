@@ -1,4 +1,4 @@
-# Deploy a simple app for sentiment analysis with Hugging Face model using Flask
+# Deploy an app for sentiment analysis with Hugging Face models using Flask
 
 The purpose of this tutorial is to show how to deploy a web service for sentiment analysis on text using your Hugging Face pretrained models.
 
@@ -6,7 +6,7 @@ The purpose of this tutorial is to show how to deploy a web service for sentimen
 
 First, the tree structure of your folder should be as follows.
 
-![image](images/tree-flask-app.png)
+![image](tree-flask-app.png)
 
 Find more information about the Flask application [here](https://flask.palletsprojects.com/en/2.0.x/quickstart/#a-minimal-application) to get ready to use it.
 
