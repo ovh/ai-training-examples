@@ -13,6 +13,22 @@ First, you have to create the folder named `models_train` and this is where you 
 
 **Then you can use the code above !**
 
+### Build the Docker image from the Dockerfile
+
+Launch the following command from the **Dockerfile** directory to build your application image:
+
+```console
+docker build . -t yolov5_web:latest
+```
+
+> [!primary]
+>
+> The dot `.` argument indicates that your build context (place of the **Dockerfile** and other needed files) is the current directory.
+>
+
+> [!primary]
+>
+> The `-t` argument allows you to choose the identifier to give to your image. Usually image identifiers are composed of a **name** and a **version tag** `<name>:<version>`. For this example we chose **flask-api:latest**.
 
 ## Test it locally (Optional)
 
