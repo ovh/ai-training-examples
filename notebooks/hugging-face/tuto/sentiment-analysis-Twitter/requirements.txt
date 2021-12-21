@@ -1,0 +1,7 @@
+# pip install -r requirements.txt
+
+pandas
+matplotlib
+sklearn
+seaborn
+transformers[sentencepiece]

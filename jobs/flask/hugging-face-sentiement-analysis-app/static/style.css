@@ -1,0 +1,33 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  text-align: left;
+  margin: 0px;
+  padding: 0px;
+  background-color: #ffffff;
+}
+
+form {
+  text-align: left;
+  height: 100%;
+}
+
+.container {
+  padding: 10px;
+}
+
+.text_bottom {
+  bottom: 0;
+}
+
+#demo {
+  color: #111;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 22px;
+  line-height: 24px;
+  margin: 0 0 24px;
+  text-justify: inter-word;
+}
