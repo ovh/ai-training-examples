@@ -1,3 +1,4 @@
+import sys
 import io
 from PIL import Image
 import cv2
@@ -15,18 +16,6 @@ app = Flask(__name__)
 dictOfModels = {}
 # create a list of keys to use them in the select part of the html code
 listOfKeys = []
-
-for r, d, f in os.walk("models_train"):
-    for file in f:
-        if ".pt" in file:
-            # example: file = "model1.pt"
-            # the path of each model: os.path.join(r, file) 
-            dictOfModels[os.path.splitext(file)[0]] = torch.hub.load('ultralytics/yolov5', 'custom', path=os.path.join(r, file), force_reload=True)
-            # you would obtain: dictOfModels = {"model1" : model1 , etc}
-    
-    for key in dictOfModels :
-        listOfKeys.append(key)     # put all the keys in the listOfKeys
-
 
 # inference fonction
 def get_prediction(img_bytes,model):
@@ -78,5 +67,26 @@ def extract_img(request):
     
 
 if __name__ == '__main__':
+    print('Starting yolov5 webservice...')
+    # Getting directory containing models from command args (or default 'models_train')
+    models_directory = 'models_train'
+    if len(sys.argv) > 1:
+        models_directory = sys.argv[1]
+    print(f'Watching for yolov5 models under {models_directory}...')
+    for r, d, f in os.walk(models_directory):
+        for file in f:
+            if ".pt" in file:
+                # example: file = "model1.pt"
+                # the path of each model: os.path.join(r, file)
+                model_name = os.path.splitext(file)[0]
+                model_path = os.path.join(r, file)
+                print(f'Loading model {model_path} with path {model_path}...')
+                dictOfModels[model_name] = torch.hub.load('ultralytics/yolov5', 'custom', path=model_path, force_reload=True)
+                # you would obtain: dictOfModels = {"model1" : model1 , etc}
+        for key in dictOfModels :
+            listOfKeys.append(key) # put all the keys in the listOfKeys
+
+    print(f'Server now running on {os.environ["JOB_URL_SCHEME"]}{os.environ["JOB_ID"]}.{os.environ["JOB_HOST"]}')
+
     # starting app
     app.run(debug=True,host='0.0.0.0')
