@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+		<style>
+			.bd-placeholder-img {
+				font-size: 1.125rem;
+				text-anchor: start;
+			}
+
+			@media (min-width: 768px) {
+				.bd-placeholder-img-lg {
+					font-size: 150%;
+				}
+			}
+		</style>
+		<link rel="stylesheet" href="/static/style.css">
+		<title>Sentiment analysis on Tweets using Hugging Face</title>
+	</head>
+	<body>
+		<form method=post enctype=multipart/form-data>
+			<img src="static/flag.png" width="100%">
+			<div style="height:80px"></div>
+			<div class="container">
+				<h3 style= "color:#030d9b"><i>OVHcloud - Sentiment analysis on Tweets using Hugging Face</i></h3>
+				<hr>
+				<div style="height:50px"></div>
+				<h5>Write your text (in english): </h5>
+				<textarea name="message" rows="4" cols="50"></textarea>
+				<br/>
+				<div style= "height:40px"></div>
+				<h5>Select Hugging Face model: </h5>
+				<select name="model_choice">
+				{%for i in range(0, len)%}
+			  		<option>{{listOfKeys[i]}}</option>
+				{%endfor%}
+				</select>
+				<div style= "height:50px"></div>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+				<div style= "height:100px"></div>
+				<p align="center">If you want to know more about AI Training, go <a href="https://www.ovhcloud.com/fr/public-cloud/ai-training/">here</a>.</p>
+    </form>
+		<script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+		<script src="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+	</body>
+</html>
