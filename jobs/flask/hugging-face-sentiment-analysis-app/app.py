@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 30 14:11:29 2021
-
-@author: epetton
-"""
-
 # import objects from the Flask model
 from flask import Flask, jsonify, render_template, request, make_response
 import transformers
