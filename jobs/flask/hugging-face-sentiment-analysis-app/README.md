@@ -17,7 +17,9 @@ The `requirements.txt` file will allow us to write all the modules needed to mak
 ```console
 Flask==1.1.2
 
-transformers
+transformers==4.4.2
+
+torch==1.6.0
 ```
 
 ### Write the Dockerfile for the application
@@ -25,7 +27,7 @@ transformers
 Your Dockerfile should start with the the `FROM` instruction indicating the parent image to use. In our case we choose to start from a pytorch image:
 
 ```console
-FROM pytorch/pytorch
+FROM python:3.8
 ```
 
 Create the home directory and add your files to it:
