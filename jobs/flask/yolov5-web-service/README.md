@@ -21,6 +21,12 @@ Launch the following command from the **Dockerfile** directory to build your app
 docker build . -t yolov5_web:latest
 ```
 
+> :heavy_exclamation_mark: The dot `.` argument indicates that your build context (place of the **Dockerfile** and other needed files) is the current directory.
+>
+
+> :heavy_exclamation_mark: The `-t` argument allows you to choose the identifier to give to your image. Usually image identifiers are composed of a **name** and a **version tag** `<name>:<version>`. For this example we chose **sentiment_analysis_app:latest**.
+
+
 ## Test it locally (Optional)
 
 Launch the following **docker command** to launch your application locally on your computer:
