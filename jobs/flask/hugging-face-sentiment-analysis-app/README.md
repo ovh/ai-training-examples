@@ -10,53 +10,7 @@ First, the tree structure of your folder should be as follows.
 
 Find more information about the Flask application [here](https://flask.palletsprojects.com/en/2.0.x/quickstart/#a-minimal-application) to get ready to use it.
 
-### Write the requirements.txt file for the application
-
-The `requirements.txt` file will allow us to write all the modules needed to make our application work. This file will be useful when writing the `Dockerfile`.
-
-```console
-Flask==1.1.2
-
-transformers==4.4.2
-
-torch==1.6.0
-```
-
-### Write the Dockerfile for the application
-
-Your Dockerfile should start with the the `FROM` instruction indicating the parent image to use. In our case we choose to start from a pytorch image:
-
-```console
-FROM python:3.8
-```
-
-Create the home directory and add your files to it:
-
-```console
-WORKDIR /workspace
-ADD . /workspace
-```
-
-Install the `requirements.txt` file which contains your needed Python modules using a `pip install ...` command:
-
-```console
-RUN pip install -r requirements.txt
-```
-
-Define your default launching command to start the application:
-
-```console
-CMD [ "python" , "/workspace/app.py" ]
-```
-
-Give correct access rights to **ovhcloud user** (`42420:42420`):
-
-```console
-RUN chown -R 42420:42420 /workspace
-ENV HOME=/workspace
-```
-
-### Build the Docker image from the Dockerfile
+## Build the Docker image
 
 Launch the following command from the **Dockerfile** directory to build your application image:
 
@@ -70,7 +24,7 @@ docker build . -t sentiment_analysis_app:latest
 > :heavy_exclamation_mark: The `-t` argument allows you to choose the identifier to give to your image. Usually image identifiers are composed of a **name** and a **version tag** `<name>:<version>`. For this example we chose **sentiment_analysis_app:latest**.
 >
 
-### Test it locally (optional)
+## Test it locally (optional)
 
 Launch the following **Docker command** to launch your application locally on your computer:
 
@@ -86,7 +40,7 @@ docker run --rm -it -p 5000:5000 --user=42420:42420 sentiment_analysis_app:lates
 
 Once started, your application should be available on `http://localhost:5000`.
 
-### Push the image into the shared registry
+## Push the image into the shared registry
 
 > :warning: The shared registry of AI Training should only be used for testing purpose. Please consider attaching your own Docker registry. More information about this can be found [here][OVH Add private registry].
 >
@@ -110,7 +64,7 @@ docker tag sentiment_analysis_app:latest <shared-registry-address>/sentiment_ana
 docker push <shared-registry-address>/sentiment_analysis_app:latest
 ```
 
-### Launch the job
+## Launch the job
 
 The following command starts a new job running your Flask application:
 
