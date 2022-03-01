@@ -13,6 +13,13 @@ First, you have to create the folder named `models_train` and this is where you 
 
 **Then you can use the code above !**
 
+## Build the Docker image 
+
+Launch the following command from the **Dockerfile** directory to build your application image:
+
+```console
+docker build . -t yolov5_web:latest
+```
 
 ## Test it locally (Optional)
 
