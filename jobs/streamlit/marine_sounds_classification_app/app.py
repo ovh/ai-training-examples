@@ -23,7 +23,7 @@ def save_file(sound_file):
 
 
 
-# transform the sound into a csv file row
+# transform the sound into a csv file
 def transform_wav_to_csv(sound_saved):
     
     # define the column names
