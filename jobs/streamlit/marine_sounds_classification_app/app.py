@@ -139,6 +139,8 @@ def choice_prediction():
 
     else:
         st.write('The file has not been uploaded yet')
+    
+    return
         
         
         
