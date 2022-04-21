@@ -87,7 +87,7 @@ To be able to use the source code below in this article you have to create an Ob
 To access and test the notebook, clone the GitHub `ovh/ai-training-examples` repository.
 
 - git repository URL: https://github.com/ovh/ai-training-examples.git
-- mount point name: `/workspace/notebook`
+- mount point name: `/workspace/ai-training-examples`
 - permission: `read write`
 
 #### Command lines in the ovhai CLI
@@ -114,7 +114,7 @@ ovhai notebook run conda jupyterlab \
 	--name <notebook-name> \
 	--framework-version <conda-version> \
   --volume <container>@<region>/:/workspace/data:RO \
-  --volume https://github.com/ovh/ai-training-examples.git:/workspace/code:RW \
+  --volume https://github.com/ovh/ai-training-examples.git:/workspace/ai-training-examples:RW \
   --gpu <nb-gpus>
 ```
 
