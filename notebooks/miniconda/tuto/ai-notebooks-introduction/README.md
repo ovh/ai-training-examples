@@ -14,8 +14,6 @@ This tutorial will allow you to create your first **OVHcloud AI notebook** based
 
 At the end of this tutorial, you will have learned to master **OVHcloud AI Notebooks** and be able to predict the scores obtained by students as a function of the number of hours worked.
 
-![image](images/linear-regression-student.png){.thumbnail}
-
 > [!primary]
 >
 > We will be able to predict a student's exam score based on the amount of time he has studied using a dataset available on [Kaggle](https://www.kaggle.com/): [Students Score Dataset](https://www.kaggle.com/datasets/shubham47/students-score-dataset-linear-regression).
