@@ -29,11 +29,11 @@ At the end of this tutorial, you will have learned to master OVHcloud AI Noteboo
 
 ## Instructions
 
-### Launching and accessing Jupyter notebook with "Miniconda" framework via UI
+You can launch your notebook from the [OVHcloud Control Panel](https://www.ovh.com/auth/?action=gotomanager&from=https://www.ovh.co.uk/&ovhSubsidiary=GB) or via the ovhai [CLI](https://docs.ovh.com/gb/en/publiccloud/ai/cli/getting-started-cli/).
+
+### Launching a Jupyter notebook with "Miniconda" via UI
 
 To launch your notebook from the [OVHcloud Control Panel](https://www.ovh.com/auth/?action=gotomanager&from=https://www.ovh.co.uk/&ovhSubsidiary=GB), refer to the following steps.
-
-Otherwise, go to the **Command lines in the ovhai CLI** part.
 
 #### Code editor
 
@@ -55,7 +55,16 @@ You can choose the version of `conda` you want.
 > The default version of `conda` is functional for this tutorial.
 >
 
-### Command lines in the ovhai CLI
+#### Resources
+
+You can choose the number of CPUs or GPUs you want. 
+
+> [!primary]
+>
+> Here, using `1 CPU` is sufficient.
+>
+
+### Launching a Jupyter notebook with "Miniconda" via CLI
 
 If you want to launch it with the CLI, choose the `jupyterlab` editor and the `conda` framework.
 
@@ -70,9 +79,7 @@ ovhai capabilities framework list -o yaml
 > If you do not specify a version, your notebook starts with the default version of `conda`.
 >
 
-You can attach your data from the Object Storage and the GitHub repository by following this [documentation](https://docs.ovh.com/gb/en/publiccloud/ai/cli/access-object-storage-data/).
-
-Choose the number of GPUs (`<nb-cpus>`) to use in your notebook and use the following command.
+Choose the number of CPUs (`<nb-cpus>`) to use in your notebook and use the following command.
 
 ``` {.console}
 ovhai notebook run conda jupyterlab \
