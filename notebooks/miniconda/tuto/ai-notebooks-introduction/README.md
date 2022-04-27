@@ -12,7 +12,7 @@ order: 7
 
 This tutorial will allow you to create your first **OVHcloud AI notebook** based on a very simple Machine Learning model: the **simple linear regression**.
 
-At the end of this tutorial, you will have learned to master OVHcloud AI Notebooks and be able to predict the scores obtained by students as a function of the number of hours worked.
+At the end of this tutorial, you will have learned to master **OVHcloud AI Notebooks** and be able to predict the scores obtained by students as a function of the number of hours worked.
 
 ![image](images/linear-regression-student.png){.thumbnail}
 
@@ -48,7 +48,7 @@ In this tutorial, the `Miniconda` framework is used.
 > With **Miniconda**, you will be able to set up your environment by installing the Python libraries you need.
 >
 
-You can choose the version of `conda` you want.
+You can choose the `conda` version you want.
 
 > [!primary]
 >
