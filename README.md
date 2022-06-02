@@ -1,4 +1,4 @@
-# Examples of use of OVHcloud AI TRAINING product
+# Examples of use of OVHcloud AI Solutions 
 
 ![githubbanner](https://user-images.githubusercontent.com/3379410/27423240-3f944bc4-5731-11e7-87bb-3ff603aff8a7.png)
  
@@ -18,14 +18,56 @@ cd ai-training-examples
 
 ## Read and experiment the tutorials
 
-We currently provide the following tutorials as `ipython notebooks`.
+The tutorials offered are categorised by **product** and by **task**. 
 
-For `Tensorflow` library :
-* Basic computation using single CPU or GPU
-* Basic computation using multiple GPUs
+We offer examples on how to use **AI Notebooks**, **AI Training** and **AI Apps**. There are many forms: `python` files, `ipython` notebooks, `Dockerfile`, ...
+
+The tutorials structure is as follows:
+
+```bash
+.
+├── jobs
+│   ├── flask
+│   │   ├── hello-world
+│   │   ├── object-detection-yolov5-app
+│   │   │   ├── static
+│   │   │   └── templates
+│   │   └── sentiment-analysis-hugging-face-app
+│   │       ├── static
+│   │       └── templates
+│   ├── jupyterlab
+│   │   └── tensorflow
+│   └── streamlit
+│       ├── audio-classification-app
+│       └── simple-app
+└── notebooks
+    ├── audio
+    │   └── audio-classification
+    ├── computer-vision
+    │   ├── image-classification
+    │   │   └── tensorflow
+    │   │       ├── tensorboard
+    │   │       └── weights-and-biases
+    │   └── object-detection
+    │       └── miniconda
+    │           └── weights-and-biases
+    ├── getting-started
+    │   ├── miniconda
+    │   │   └── ai-notebooks-introduction
+    │   ├── pytorch
+    │   └── tensorflow
+    └── natural-language-processing
+        └── text-classification
+            └── hugging-face
+                └── sentiment-analysis-twitter
+                    ├── BARThez
+                    ├── BERT
+                    └── CamemBERT
+```
  
 # Related links
  
+ * Documentation: https://docs.ovh.com/gb/en/publiccloud/ai/
  * Contribute: https://github.com/ovh/ai-training-examples/blob/master/CONTRIBUTING.md
  * Report bugs: https://github.com/ovh/ai-training-examples/issues
  
