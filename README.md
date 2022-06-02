@@ -18,7 +18,7 @@ cd ai-training-examples
 
 ## Read and experiment the tutorials
 
-The tutorials offered are categorised by **product** and by **task**. 
+The tutorials are categorised by **product** and by **task**. 
 
 We offer examples on how to use **AI Notebooks**, **AI Training** and **AI Apps**. There are many forms: `python` files, `ipython` notebooks, `Dockerfile`, ...
 
