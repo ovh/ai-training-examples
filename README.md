@@ -2,7 +2,7 @@
 
 ![githubbanner](https://user-images.githubusercontent.com/3379410/27423240-3f944bc4-5731-11e7-87bb-3ff603aff8a7.png)
  
-[![Maintenance](https://img.shields.io/maintenance/yes/2021.svg)]() [![Chat on gitter](https://img.shields.io/gitter/room/ovh/ux.svg)](https://gitter.im/ovh/ai)
+[![Maintenance](https://img.shields.io/maintenance/yes/2022.svg)]() [![Chat on gitter](https://img.shields.io/gitter/room/ovh/ux.svg)](https://gitter.im/ovh/ai)
 
 This repository centralize all resources and examples (such as notebooks) that could be use with the [OVHcloud AI Training product](https://www.ovhcloud.com/en-gb/public-cloud/ai-training/)
  
