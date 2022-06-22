@@ -1,0 +1,3 @@
+gradio==3.0.10
+tensorflow==2.9.1
+opencv-python-headless==4.6.0.66
