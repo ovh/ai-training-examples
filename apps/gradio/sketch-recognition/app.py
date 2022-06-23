@@ -21,7 +21,7 @@ ref = "Find the whole code [here](https://github.com/ovh/ai-training-examples/tr
 img_size = 28
 
 # classes name (from 0 to 9)
-labels = ["zero", "one", "two", "three", "four", "five", "six", "seven", "height", "nine"]
+labels = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
 # load model (trained on MNIST dataset)
 model = tf.keras.models.load_model("model/sketch_recognition_numbers_model.h5")
