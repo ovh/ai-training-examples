@@ -15,7 +15,7 @@ head = (
 )
 
 # GitHub repository link
-ref = "Find the whole code [here](ADD github link)."
+ref = "Find the whole code [here](https://github.com/ovh/ai-training-examples/tree/main/apps/gradio)."
 
 # image size: 28x28
 img_size = 28
