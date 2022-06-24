@@ -1,0 +1,14 @@
+# Need to create a GitPod variable (https://www.gitpod.io/docs/environment-variables#using-the-account-settings) OVH_REGION with the value of your region, for instance gra.
+tasks:
+  - init: echo 'Initialize OVHcloud environment' 
+    command: >
+      curl https://cli.$OVH_REGION.training.ai.cloud.ovh.net/ovhai-linux.zip -o ~/ovhai-linux.zip
+      mkdir ~/tools
+      unzip ~/ovhai-linux.zip -d ~/tools
+      rm ~/ovhai-linux.zip
+      export PATH=$PATH:~/tools/ 
+
+# List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 3000
+    onOpen: open-preview
