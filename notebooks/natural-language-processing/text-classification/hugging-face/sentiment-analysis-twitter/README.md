@@ -19,7 +19,7 @@ We will compare 3 different [Hugging Face](https://huggingface.co/) models:
 
 Tweets are divided into 2 classes according to their sentiment: **positive** or **negative**.
 
-![camemBERT_results](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/CamemBERT/results-camembert.png)
+![camemBERT_results](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/natural-language-processing/text-classification/hugging-face/sentiment-analysis-twitter/CamemBERT/results-camembert.png)
 
 ### Sentiment Analysis with barthez-sentiment-classification
 
@@ -27,7 +27,7 @@ Tweets are divided into 2 classes according to their sentiment: **positive** or 
 
 Tweets are divided into 2 classes according to their sentiment: **positive** or **negative**.
 
-![BARThez_results](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/BARThez/results-barthez.png)
+![BARThez_results](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/natural-language-processing/text-classification/hugging-face/sentiment-analysis-twitter/BARThez/results-barthez.png)
 
 ### Sentiment Analysis with bert-base-multilingual-uncased-sentiment
 
@@ -35,7 +35,7 @@ Tweets are divided into 2 classes according to their sentiment: **positive** or 
 
 Tweets are divided into 5 classes, from 1 to 5 stars, according to their sentiment: 1 star corresponds to a **very negative** tweet while 5 stars corresponds to a **very positive** tweet.
 
-![BERT_results](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/BERT/results-bert.png)
+![BERT_results](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/natural-language-processing/text-classification/hugging-face/sentiment-analysis-twitter/BERT/results-bert.png)
 
 ## Comparison of models performance
 
@@ -47,12 +47,12 @@ The confusion matrix will also give us information about false positives or fals
 
 ### Consufion matrix - BARThez x reel sentiments
 
-![BARThez_matrix](BARThez/confusion-matrix-barthez.png)
+![BARThez_matrix](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/natural-language-processing/text-classification/hugging-face/sentiment-analysis-twitter/BARThez/confusion-matrix-barthez.png)
 
 Success rate: 87.02 %
 
 ### Consufion matrix - CamemBERT x reel sentiments
 
-![CamemBERT_matrix](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/CamemBERT/confusion-matrix-camembert.png)
+![CamemBERT_matrix](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/natural-language-processing/text-classification/hugging-face/sentiment-analysis-twitter/CamemBERT/confusion-matrix-camembert.png)
 
 Success rate: 78.63 %
