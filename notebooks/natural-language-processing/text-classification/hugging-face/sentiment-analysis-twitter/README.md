@@ -47,7 +47,7 @@ The confusion matrix will also give us information about false positives or fals
 
 ### Consufion matrix - BARThez x reel sentiments
 
-![BARThez_matrix](https://github.com/eleapttn/ai-training-examples/blob/main/notebooks/hugging-face/tuto/sentiment-analysis-Twitter/BARThez/confusion-matrix-barthez.png)
+![BARThez_matrix](BARThez/confusion-matrix-barthez.png)
 
 Success rate: 87.02 %
 
