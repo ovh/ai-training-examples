@@ -57,13 +57,13 @@ Currently, you can use the following methods.
 ### Audio to csv with features extraction
 
 ```console
-ovhai job run --cpu 12 --volume spoken-digit@GRA/:/workspace/data:RW:cache your_docker_id/two-models:latest -- bash -c 'python data_processing/data-processing-audio-files-csv.py'
+ovhai job run --cpu 12 --volume spoken-digit@GRA/:/workspace/data:RW:cache your_docker_id/two-models:latest -- bash -c 'python data-processing/data-processing-audio-files-csv.py'
 ```
 
 ### Audio to spectrogram with image generation
 
 ```console
-ovhai job run --cpu 12 --volume spoken-digit@GRA/:/workspace/data:RW:cache your_docker_id/two-models:latest -- bash -c 'python data_processing/data-processing-audio-files-spectrograms.py'
+ovhai job run --cpu 12 --volume spoken-digit@GRA/:/workspace/data:RW:cache your_docker_id/two-models:latest -- bash -c 'python data-processing/data-processing-audio-files-spectrograms.py'
 ```
 
 You should have your oject storage container like that:
@@ -103,13 +103,13 @@ Launch 2 jobs with AI Training:
 ### ANN for audio classification based on audios feature
 
 ```console
-ovhai job run --gpu 1 --volume spoken-digit@GRA/:/workspace/data:RO:cache your_docker_id/two-models:latest -- bash -c 'python python_codes_csv_files/train-classification-audio_files_csv.py'
+ovhai job run --gpu 1 --volume spoken-digit@GRA/:/workspace/data:RO:cache your_docker_id/two-models:latest -- bash -c 'python models-training/train-classification-audio_files_csv.py'
 ```
 
 ### CNN for image classification based on spectrograms
 
 ```console
-ovhai job run --gpu 1 --volume spoken-digit@GRA/:/workspace/data:RO:cache your_docker_id/two-models:latest -- bash -c 'python python_codes_spectrograms/train-image-classification-audio-files-spectrograms.py'
+ovhai job run --gpu 1 --volume spoken-digit@GRA/:/workspace/data:RO:cache your_docker_id/two-models:latest -- bash -c 'python models-training/train-image-classification-audio-files-spectrograms.py'
 ```
 
 ### Weights & Biases
