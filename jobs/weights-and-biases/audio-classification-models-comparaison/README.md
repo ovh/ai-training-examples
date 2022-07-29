@@ -36,6 +36,12 @@ You should have:
         └── nine
 ```
 
+> :warning: Put yourself in the **right directory** before building your Docker image!
+> 
+```console
+cd ai-training-examples/jobs/weights-and-biases/audio-classification-models-comparaison
+```
+
 ## Build and push the Docker image
 
 Please, replace `your_docker_id` by yours!
