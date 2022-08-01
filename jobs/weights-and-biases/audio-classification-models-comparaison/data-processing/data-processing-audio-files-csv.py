@@ -31,7 +31,7 @@ def createDataframe():
             sound_name = f"/workspace/data/audio_files/{nb}/{filename}"
             
             # feature extraction
-            y, sr = librosa.load(sound_name, mono = True, duration = 30)
+            y, sr = librosa.load(sound_name, mono = True, duration = 3)
             chroma_stft = librosa.feature.chroma_stft(y = y, sr = sr)
             rmse = librosa.feature.rms(y = y)
             spec_cent = librosa.feature.spectral_centroid(y = y, sr = sr)
@@ -46,7 +46,7 @@ def createDataframe():
                 to_append += f' {np.mean(e)}'
             to_append += f' {nb}'
             
-            file = open('/workspace/data/csv_files/data_30_sec.csv', 'a', newline = '')
+            file = open('/workspace/data/csv_files/data_3_sec.csv', 'a', newline = '')
 
             with file:
                 writer = csv.writer(file)
