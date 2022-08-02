@@ -50,7 +50,7 @@ def trainModel(model):
     run = wandb.init(project = 'spoken-digit-classification',
                      config = {  
                          "epochs": 100,
-                         "loss_function": "categorical_crossentropy",
+                         "loss_function": "sparse_categorical_crossentropy",
                          "architecture": "CNN",
                          "dataset": "free-spoken-digit"
                      })
