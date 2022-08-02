@@ -36,8 +36,9 @@ You should have:
         └── nine
 ```
 
-> :warning: Put yourself in the **right directory** before building your Docker image!
+> :warning: Make sure to go to the **right directory** before building your Docker image!
 > 
+
 ```console
 cd ai-training-examples/jobs/weights-and-biases/audio-classification-models-comparaison
 ```
@@ -56,8 +57,6 @@ docker push your_docker_id/two-models:latest
 
 ## Data processing
 
-*Working on a faster method (cc Data processing team)*
-
 Currently, you can use the following methods.
 
 ### Audio to csv with features extraction
@@ -72,7 +71,7 @@ ovhai job run --cpu 12 --volume spoken-digit@GRA/:/workspace/data:RW:cache your_
 ovhai job run --cpu 12 --volume spoken-digit@GRA/:/workspace/data:RW:cache your_docker_id/two-models:latest -- bash -c 'python data-processing/data-processing-audio-files-spectrograms.py'
 ```
 
-You should have your oject storage container like that:
+You should have your object storage:
 
 ```console
 ├── spoken-digit
