@@ -1,0 +1,7 @@
+librosa==0.9.1
+pydub==0.25.1
+sentencepiece==0.1.96
+torch==1.11.0
+torchmetrics==0.9.1
+transformers==4.19.2
+youtube_dl==2021.12.17
