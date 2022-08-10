@@ -1,0 +1,8 @@
+librosa==0.9.1
+matplotlib==3.5.2
+pandas==1.4.3
+pydub==0.25.1
+torch==1.11.0
+torchmetrics==0.9.1
+tokenizers==0.12.1
+transformers==4.19.2
