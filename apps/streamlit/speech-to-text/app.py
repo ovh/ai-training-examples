@@ -2,7 +2,7 @@
 
 # Models
 import torch
-from transformers import pipeline, T5Tokenizer, T5ForConditionalGeneration, Wav2Vec2ForCTC, Wav2Vec2Tokenizer
+from transformers import T5Tokenizer
 
 # Audio Manipulation
 import audioread
@@ -15,6 +15,7 @@ from youtube_dl import DownloadError
 from datetime import timedelta
 import os
 import pandas as pd
+import pickle
 import re
 import streamlit as st
 import time
@@ -45,7 +46,7 @@ def config():
         st.session_state["start_time"] = 0
         st.session_state["summary"] = ""
         st.session_state["number_of_speakers"] = 0
-        st.session_state["chosen_mode"] = 0
+        st.session_state["choosen_mode"] = 0
         st.session_state["token_list"] = []
 
     # Display Text and CSS
@@ -132,34 +133,35 @@ def load_options(audio_length):
 @st.cache(allow_output_mutation=True)
 def load_models():
     """
-    Load each model needed by the app (transcribe, punctuate, summarize, diarization)
+    Instead of downloading each time the models we use (transcript model, summarizer, speaker differentiation, ...)
+    thanks to transformers' pipeline, we directly import them locally to save time when the app is launched.
     This function has a st.cache(), because as the models never change, we want the function to execute only one time
     (also to save time). Otherwise, it would run every time we transcribe a new audio file.
 
     :return: Loaded models
     """
-    loaded_models = 0
-    nb_objects_to_load = 4
+    # Load Wav2Vec2 (Transcriber model)
 
-    # Load # English Speech to text fast Model
-    with st.spinner("Initialization of the app. We are downloading the models.(" + str(loaded_models) + "/" + str(nb_objects_to_load) + ")"):
-        stt_tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
-        stt_model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
-        loaded_models +=1
+    # English Model
+    stt_tokenizer = pickle.load(open("models/STT_tokenizer.sav", 'rb'))
+    stt_model = pickle.load(open("models/STT_model.sav", 'rb'))
+
     # Load T5 model (Auto punctuation model)
-    with st.spinner("Initialization of the app. We are downloading the models.(" + str(loaded_models) + "/" + str(nb_objects_to_load) + ")"):
-        t5_tokenizer = T5Tokenizer.from_pretrained("flexudy/t5-small-wav2vec2-grammar-fixer")
-        t5_model = T5ForConditionalGeneration.from_pretrained("flexudy/t5-small-wav2vec2-grammar-fixer")
-        loaded_models +=1
+    # (Here T5 Tokenizer can't be loaded with pickle, as pickle serializes the model so it creates a local path in our
+    # object, which results in errors when app is not deployed locally anymore.
+    # t5_tokenizer = pickle.load(open("models/T5_tokenizer.sav", 'rb'))
+    t5_tokenizer = T5Tokenizer.from_pretrained("models/T5_tokenizer_save/spiece.model")
+    t5_model = pickle.load(open("models/T5_model.sav", 'rb'))
+
     # Load summarizer model
-    with st.spinner("Initialization of the app. We are downloading the models.(" + str(loaded_models) + "/" + str(nb_objects_to_load) + ")"):
-        summarizer = pipeline("summarization")
-        loaded_models +=1
+    summarizer = pickle.load(open("models/summarizer.sav", 'rb'))
+
     # Diarization model (Differentiate speakers)
-    with st.spinner("Initialization of the app. We are downloading the models.(" + str(loaded_models) + "/" + str(nb_objects_to_load) + ")"):
-        dia_pipeline = torch.hub.load('pyannote/pyannote-audio', 'dia')
-        loaded_models+=1
-        
+    dia_pipeline = pickle.load(open("models/dia_pipeline.sav", 'rb'))
+
+    # Overlap model
+    # overlap_pipeline = pickle.load(open("models/overlap_pipeline.sav", 'rb'))
+
     return stt_tokenizer, stt_model, t5_tokenizer, t5_model, summarizer, dia_pipeline
 
 
@@ -253,9 +255,8 @@ def transcription(stt_tokenizer, stt_model, t5_tokenizer, t5_model, summarizer, 
 
         # Switching model for the better one
         if choose_better_model:
-            with st.spinner("We are loading the better model. Please wait..."):
-                STT_tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-large-960h-lv60-self")
-                STT_model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-large-960h-lv60-self")
+            stt_tokenizer = pickle.load(open("models/STTv2_tokenizer.sav", 'rb'))
+            stt_model = pickle.load(open("models/STTv2_model.sav", 'rb'))
 
         # Validate options and launch the transcription process thanks to the form's button
         if transcript_btn:
@@ -279,9 +280,9 @@ def transcription(stt_tokenizer, stt_model, t5_tokenizer, t5_model, summarizer, 
 
                     # Save mode chosen by user, to display expected results
                     if not timestamps_token:
-                        update_session_state("chosen_mode", "DIA")
+                        update_session_state("choosen_mode", "DIA")
                     elif timestamps_token:
-                        update_session_state("chosen_mode", "DIA_TS")
+                        update_session_state("choosen_mode", "DIA_TS")
 
                     # Convert mp3/mp4 to wav (Differentiate speakers mode only accepts wav files)
                     if filename.endswith((".mp3", ".mp4")):
@@ -321,9 +322,9 @@ def transcription(stt_tokenizer, stt_model, t5_tokenizer, t5_model, summarizer, 
                 else:
                     # Save mode chosen by user, to display expected results
                     if not timestamps_token:
-                        update_session_state("chosen_mode", "NODIA")
+                        update_session_state("choosen_mode", "NODIA")
                     if timestamps_token:
-                        update_session_state("chosen_mode", "NODIA_TS")
+                        update_session_state("choosen_mode", "NODIA_TS")
 
                     filename = "data/" + filename
                     # Transcribe process with non Diarization Mode
@@ -458,7 +459,7 @@ def create_txt_text_from_process(punctuation_token=False, t5_model=None, t5_toke
     # The information to be extracted is different according to the chosen mode
     if punctuation_token:
         with st.spinner("Transcription is finished! Let us punctuate your audio"):
-            if st.session_state["chosen_mode"] == "DIA":
+            if st.session_state["choosen_mode"] == "DIA":
                 for elt in st.session_state["process"]:
                     # [2:] don't want ": text" but only the "text"
                     text_to_summarize = elt[2][2:]
@@ -472,7 +473,7 @@ def create_txt_text_from_process(punctuation_token=False, t5_model=None, t5_toke
 
                     txt_text += elt[1] + " : " + summarized_text + '\n\n'
 
-            elif st.session_state["chosen_mode"] == "DIA_TS":
+            elif st.session_state["choosen_mode"] == "DIA_TS":
                 for elt in st.session_state["process"]:
                     text_to_summarize = elt[3][2:]
                     if len(text_to_summarize) >= 512:
@@ -485,11 +486,11 @@ def create_txt_text_from_process(punctuation_token=False, t5_model=None, t5_toke
 
                     txt_text += elt[2] + " : " + summarized_text + '\n\n'
     else:
-        if st.session_state["chosen_mode"] == "DIA":
+        if st.session_state["choosen_mode"] == "DIA":
             for elt in st.session_state["process"]:
                 txt_text += elt[1] + elt[2] + '\n\n'
 
-        elif st.session_state["chosen_mode"] == "DIA_TS":
+        elif st.session_state["choosen_mode"] == "DIA_TS":
             for elt in st.session_state["process"]:
                 txt_text += elt[2] + elt[3] + '\n\n'
 
@@ -515,10 +516,10 @@ def rename_speakers_window():
         # Saving the Speaker Name and its ID in a list, example : [1, 'Speaker1']
         list_of_speakers = []
         for elt in st.session_state["process"]:
-            if st.session_state["chosen_mode"] == "DIA_TS":
+            if st.session_state["choosen_mode"] == "DIA_TS":
                 if [elt[1], elt[2]] not in list_of_speakers:
                     list_of_speakers.append([elt[1], elt[2]])
-            elif st.session_state["chosen_mode"] == "DIA":
+            elif st.session_state["choosen_mode"] == "DIA":
                 if [elt[0], elt[1]] not in list_of_speakers:
                     list_of_speakers.append([elt[0], elt[1]])
 
@@ -1217,20 +1218,20 @@ def display_results():
     # Display results of transcript by steps
     if st.session_state["process"] != []:
 
-        if st.session_state["chosen_mode"] == "NODIA":  # Non diarization, non timestamps case
+        if st.session_state["choosen_mode"] == "NODIA":  # Non diarization, non timestamps case
             for elt in (st.session_state['process']):
                 st.write(elt[0])
 
-        elif st.session_state["chosen_mode"] == "DIA":  # Diarization without timestamps case
+        elif st.session_state["choosen_mode"] == "DIA":  # Diarization without timestamps case
             for elt in (st.session_state['process']):
                 st.write(elt[1] + elt[2])
 
-        elif st.session_state["chosen_mode"] == "NODIA_TS":  # Non diarization with timestamps case
+        elif st.session_state["choosen_mode"] == "NODIA_TS":  # Non diarization with timestamps case
             for elt in (st.session_state['process']):
                 st.button(elt[0], on_click=update_session_state, args=("start_time", elt[2],))
                 st.write(elt[1])
 
-        elif st.session_state["chosen_mode"] == "DIA_TS":  # Diarization with timestamps case
+        elif st.session_state["choosen_mode"] == "DIA_TS":  # Diarization with timestamps case
             for elt in (st.session_state['process']):
                 st.button(elt[0], on_click=update_session_state, args=("start_time", elt[4],))
                 st.write(elt[2] + elt[3])
@@ -1315,6 +1316,7 @@ def extract_audio_from_yt_video(url):
     """
     filename = "yt_download_" + url[-11:] + ".mp3"
     try:
+        # url = "https://www.youtube.com/watch?v=sAsBZgz0mig"
 
         ydl_opts = {
             'format': 'bestaudio/best',
@@ -1333,4 +1335,3 @@ def extract_audio_from_yt_video(url):
         filename = None
 
     return filename
-
