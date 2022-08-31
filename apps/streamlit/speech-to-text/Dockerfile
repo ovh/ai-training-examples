@@ -3,7 +3,7 @@ FROM ovhcom/ai-training-one-for-all
 WORKDIR /workspace
 ADD . /workspace
 
-RUN pip install -r requirements
+RUN pip install -r requirements.txt
 
 CMD [ "streamlit" , "run" , "/workspace/main.py", "--server.address=0.0.0.0" ]
 
