@@ -2,8 +2,9 @@ from app import *
 
 if __name__ == '__main__':
     config()
-    if st.session_state['txt_transcript'] == 0:
-
+    
+    if st.session_state['page_index'] == 0:
+         # Home page
         choice = st.radio("Features", ["By a video URL", "By uploading a file"])
 
         stt_tokenizer, stt_model, t5_tokenizer, t5_model, summarizer, dia_pipeline = load_models()
@@ -14,10 +15,10 @@ if __name__ == '__main__':
         elif choice == "By uploading a file":
             transcript_from_file(stt_tokenizer, stt_model, t5_tokenizer, t5_model, summarizer, dia_pipeline)
 
-    elif st.session_state['txt_transcript'] == 1:
-        # Display Results page
+    elif st.session_state['page_index'] == 1:
+        # Results page
         display_results()
 
-    elif st.session_state['txt_transcript'] == 2:
+    elif st.session_state['page_index'] == 2:
         # Rename speakers page
         rename_speakers_window()

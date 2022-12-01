@@ -1,11 +1,14 @@
+librosa==0.9.1
 youtube_dl==2021.12.17
+numba==0.56.4
 streamlit==1.9.0
 transformers==4.18.0
 httplib2==0.20.2
 torch==1.11.0
+torchtext==0.12.0
 torchaudio==0.11.0
 sentencepiece==0.1.96
 tokenizers==0.12.1
-pyannote.audio==2.0.1
+pyannote.audio==2.1.1
 pyannote.core==4.4
 pydub==0.25.1
