@@ -1,3 +1,7 @@
+"""
+This script allows you to download the models used by our speech to text app from their respective librairies. These models are saved in a speech_to_text_app_models folder. This can save you some time when you initialize the app.
+"""
+
 from transformers import pipeline, Wav2Vec2Tokenizer, Wav2Vec2ForCTC, T5Tokenizer, T5ForConditionalGeneration, HubertForCTC, Wav2Vec2Processor
 import pickle
 import torch 
