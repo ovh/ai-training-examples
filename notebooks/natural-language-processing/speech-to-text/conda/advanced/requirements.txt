@@ -1,7 +1,8 @@
-pyannote.audio==2.0.1
+pyannote.audio==2.1.1
 pyannote.core==4.4
 pydub==0.25.1
 tokenizers==0.12.1
 torch==1.11.0
+torchtext==0.12.0
 torchaudio==0.11.0
 transformers==4.18.0
