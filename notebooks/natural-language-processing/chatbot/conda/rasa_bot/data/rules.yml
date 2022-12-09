@@ -1,0 +1,41 @@
+version: "3.1"
+
+rules:
+- rule: Detect greetting when the user want to do this 
+  steps:
+  - intent: greetting
+  - action: utter_greetting
+
+- rule: Detect bye when the user want to do this 
+  steps:
+  - intent: bye
+  - action: utter_bye
+
+- rule: Detect consummation when the user want to do this 
+  steps:
+  - intent: consummation
+  - action: utter_consummation
+
+  
+
+
+- rule: Activate the bilan form
+  steps:
+  - intent: help
+  - action: bilan
+  - active_loop: bilan
+
+- rule: Submit the bilan form
+  condition:
+  # Condition that form is active
+  - active_loop: bilan
+  steps:
+  # Form is deactivated
+  - action: bilan
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The action to run when the form is submitted. (To do : Define them as custom actions or just responses)
+  - action: utter_submit
+  - action: utter_slots_values
+
