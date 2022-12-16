@@ -27,9 +27,8 @@ The tutorials structure is as follows:
 ```bash
 .
 ├── apps
-│   └── gradio
-│       └── sketch-recognition
-├── jobs
+│   ├── fastapi
+│   │   └── spam-classifier-api
 │   ├── flask
 │   │   ├── hello-world
 │   │   ├── object-detection-yolov5-app
@@ -38,34 +37,60 @@ The tutorials structure is as follows:
 │   │   └── sentiment-analysis-hugging-face-app
 │   │       ├── static
 │   │       └── templates
-│   ├── jupyterlab
-│   │   └── tensorflow
+│   ├── getting-started
+│   │   └── flask
+│   │       └── hello-world-api
+│   ├── gradio
+│   │   └── sketch-recognition
 │   └── streamlit
 │       ├── audio-classification-app
-│       └── simple-app
+│       ├── eda-classification-iris
+│       ├── simple-app
+│       └── speech-to-text
+├── jobs
+│   ├── jupyterlab
+│   │   └── tensorflow
+│   └── weights-and-biases
+│       └── audio-classification-models-comparaison
+│           ├── data-processing
+│           └── models-training
 └── notebooks
     ├── audio
     │   └── audio-classification
     ├── computer-vision
     │   ├── image-classification
     │   │   └── tensorflow
+    │   │       ├── resnet50
     │   │       ├── tensorboard
     │   │       └── weights-and-biases
     │   └── object-detection
     │       └── miniconda
-    │           └── weights-and-biases
+    │           ├── yolov5
+    │           │   └── weights-and-biases
+    │           └── yolov7
+    │               └── images
     ├── getting-started
     │   ├── miniconda
     │   │   └── ai-notebooks-introduction
     │   ├── pytorch
     │   └── tensorflow
     └── natural-language-processing
+        ├── speech-to-text
+        │   └── miniconda
+        │       ├── advanced
+        │       │   └── sounds
+        │       ├── basics
+        │       │   └── sounds
+        │       └── compare-models
+        │           └── sounds
         └── text-classification
-            └── hugging-face
-                └── sentiment-analysis-twitter
-                    ├── BARThez
-                    ├── BERT
-                    └── CamemBERT
+            ├── hugging-face
+            │   └── sentiment-analysis-twitter
+            │       ├── BARThez
+            │       ├── BERT
+            │       └── CamemBERT
+            └── miniconda
+                └── spam-classifier
 ```
 
 # Related links
