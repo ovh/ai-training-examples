@@ -46,7 +46,7 @@ def predict():
     results.render()
     
     # encoding the resulting image and return it
-    for img in results.imgs:
+    for img in results.ims:
         RGB_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         im_arr = cv2.imencode('.jpg', RGB_img)[1]
         response = make_response(im_arr.tobytes())
@@ -85,8 +85,6 @@ if __name__ == '__main__':
                 # you would obtain: dictOfModels = {"model1" : model1 , etc}
         for key in dictOfModels :
             listOfKeys.append(key) # put all the keys in the listOfKeys
-
-    print(f'Server now running on {os.environ["JOB_URL_SCHEME"]}{os.environ["JOB_ID"]}.{os.environ["JOB_HOST"]}')
 
     # starting app
     app.run(debug=True,host='0.0.0.0')
