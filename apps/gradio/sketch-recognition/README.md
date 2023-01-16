@@ -20,7 +20,7 @@ In order to do this, you will use [Gradio](https://gradio.app/), an open-source 
 
 Overview of the app:
 
-![Overview](images/overview-gradio-app.png){.thumbnail}
+![Overview](images/overview-gradio-app.png)
 
 ## Requirements
 
