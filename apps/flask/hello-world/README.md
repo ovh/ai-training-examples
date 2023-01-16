@@ -1,7 +1,7 @@
 # AI Deploy - Tutorial - Deploy a simple app with Flask
 
 > **Note**
-> Access to the full documentation [here](https://docs.ovh.com/gb/en/publiccloud/ai/deploy/tuto-build-use-flask-image/)
+> Access to the full documentation [here](https://docs.ovh.com/gb/en/publiccloud/ai/deploy/tuto-build-use-flask-image/).
 
 **Last updated 3rd November, 2022.**
 
