@@ -1,5 +1,6 @@
 # AI Deploy - Tutorial - Deploy a web service for YOLOv5 using Flask
 
+> **Note** Access to the full documentation [here](https://docs.ovh.com/gb/en/publiccloud/ai/deploy/web-service-yolov5/).
 **Last updated 3rd November, 2022.**
 
 > **Note**
