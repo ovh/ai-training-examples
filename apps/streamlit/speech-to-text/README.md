@@ -24,6 +24,9 @@ Overview of the Speech to text app:
 
 ![Overview](images/speech-to-text-app-overview.png)
 
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/R_CjNtPLw7M)
+[![Watch the video]](https://youtu.be/R_CjNtPLw7M)
+
 ## Requirements
 
 To deploy your app, you need:
