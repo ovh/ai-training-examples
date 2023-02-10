@@ -20,7 +20,7 @@ Deploying your app will allow you to benefit from **very powerful resources** wh
 
 Here, the use case is **English Speech Recognition**, but you can choose another model as explained in our [blog article](https://blog.ovhcloud.com/how-to-build-a-speech-to-text-application-with-python-1-3/). Some models work with Chinese, French, German, Japanese, Russian, etc.
 
-Overview of the Speech to text app (Click image to see all features):
+### Overview of the Speech to text app (Click image to see all features):
 [![Overview](images/speech-to-text-app-overview.png)](https://youtu.be/R_CjNtPLw7M)
 
 ## Requirements
