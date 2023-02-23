@@ -6,7 +6,7 @@ import transformers
 app = Flask(__name__)
 
 # create a python dictionary for your models d = {<key>: <value>, <key>: <value>, ..., <key>: <value>}
-dictOfModels = {"RoBERTa" : transformers.pipeline("sentiment-analysis", model="siebert/sentiment-roberta-large-english"), "BERT" : transformers.pipeline('sentiment-analysis', model="nlptown/bert-base-multilingual-uncased-sentiment")}
+dictOfModels = {"BERT" : transformers.pipeline('sentiment-analysis', model="nlptown/bert-base-multilingual-uncased-sentiment")} # feel free to add several models
 
 listOfKeys = []
 for key in dictOfModels :
