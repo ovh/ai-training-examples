@@ -11,7 +11,7 @@ services:
       - 5005:5005
       - 5055:5055
     build:
-      context: back_end
+      context: back-end
       dockerfile: rasa.Dockerfile
   flask:
     image: flask
@@ -19,7 +19,7 @@ services:
     ports:
       - 5000:5000
     build:
-      context: front_end
+      context: front-end
       dockerfile: flask.Dockerfile
   
   
