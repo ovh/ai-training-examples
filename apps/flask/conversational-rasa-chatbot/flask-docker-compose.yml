@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  rasa:
+    image: rasa
+    container_name: "rasa_server"
+    command: bash -c 'rasa run -m models --cors "*" --debug --connector socketio --credentials "credentials.yml" --endpoints "endpoints.yml" & rasa run actions '
+    environment:
+      - JWT_SECRET=<the-json-token-key-in-the-.env-file>
+    ports:
+      - 5005:5005
+      - 5055:5055
+    build:
+      context: back-end
+      dockerfile: rasa.Dockerfile
+  flask:
+    image: flask
+    container_name: "flask_server"
+    ports:
+      - 5000:5000
+    build:
+      context: front-end
+      dockerfile: flask.Dockerfile
+  
+  
+  
+# Command to run : 
+# docker compose -f "flask-docker-compose.yml" up -d --build

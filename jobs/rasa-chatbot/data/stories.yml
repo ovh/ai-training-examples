@@ -1,0 +1,40 @@
+
+- story: interactive_story_1
+  steps:
+  - intent: greetting
+  - action: utter_greetting
+  - intent: help
+  - action: bilan
+  - active_loop: bilan
+  - slot_was_set:
+    - requested_slot: typeofhouse
+  - slot_was_set:
+    - typeofhouse: house
+  - slot_was_set:
+    - typeofhouse: house
+  - slot_was_set:
+    - requested_slot: typeoftransport
+  - slot_was_set:
+    - typeoftransport: bus
+  - slot_was_set:
+    - typeoftransport: null
+  - slot_was_set:
+    - requested_slot: typeoftransport
+  - slot_was_set:
+    - typeoftransport: RER
+  - slot_was_set:
+    - typeoftransport: rer
+  - slot_was_set:
+    - requested_slot: typeofwork
+  - slot_was_set:
+    - typeofwork: on site
+  - slot_was_set:
+    - typeofwork: on site
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit
+  - action: utter_slots_values
+  - intent: bye
+  - action: utter_bye
+  - intent: help

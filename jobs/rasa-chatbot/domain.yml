@@ -1,0 +1,62 @@
+version: '3.1'
+intents:
+- bye
+- consummation
+- greetting
+- help
+- inform
+entities:
+- typeoftransport
+- typeofhouse
+- typeofwork
+slots:
+  typeofhouse:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: typeofhouse
+  typeoftransport:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: typeoftransport
+  typeofwork:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: typeofwork
+forms:
+  bilan:
+    required_slots:
+    - typeofhouse
+    - typeoftransport
+    - typeofwork
+responses:
+  utter_greetting:
+  - text: Hello you
+  utter_bye:
+  - text: 'Good bye ! '
+  utter_consummation:
+  - text: I don't know I need more information
+  utter_ask_bilan_typeofhouse:
+  - text: Can you tell me were you live ? Is it an appartment a house ?
+  utter_ask_bilan_typeoftransport:
+  - text: Can you tell me which transport you take to go to work ?
+  utter_ask_bilan_typeofwork:
+  - text: Do you work on remote or do you go on site ?
+  utter_submit:
+  - text: Thank you for submitting the form
+  utter_slots_values:
+  - text: 'Here are the values of what you entered : {typeofhouse}, {typeoftransport}, {typeofwork} '
+actions:
+- utter_bye
+- utter_greetting
+- utter_slots_values
+- utter_submit
+- validate_bilan
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
