@@ -54,7 +54,7 @@ if __name__ == '__main__':
     model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
     # add the TensorBoard callback
-    log_dir = "/Users/epetton/PycharmProjects/TutorialsAirFlow/Tuto3-TrainingTracking/workspace/runs/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    log_dir = "/workspace/runs/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
 
     # take a subset of images (you don't need to display all of them)
