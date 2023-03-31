@@ -1,57 +1,264 @@
-# ASL recognition using YOLOv7
+# AI Deploy - Tutorial - Create a web service to recognize sign language with YOLOv7
 
-*The previous code will be used to launch a notebook and an app from **OVHcloud AI Tools**.*
+**Last updated 31th March, 2023.**
 
-📄 Access to Weights & Biases report [here](https://api.wandb.ai/links/asl-alphabet-data-augment-ovh/wau6k1rd).
+## Objective
+
+The purpose of this tutorial is to show how to deploy a web service to recognize **Amercian Sign Language letters** using YOLOv7 model.
+
+In order to do this, you will use [Streamlit](https://streamlit.io/), a Python framework that turns scripts into a shareable web application. You will also learn how to build and use a custom Docker image for a Streamlit application.
+
+For more information on how to train YOLOv7 on a custom dataset, refer to the following [documentation](https://docs.ovh.com/gb/en/publiccloud/ai/notebooks/yolov7-sign-language/).
+
+Overview of the Sign Language recognition app:
+
+![Overview](images/overview-streamlit-yolov7-asl.png)
 
 ## Requirements
 
-- a Public Cloud project in your OVHcloud account
-- access to the OVHcloud Control Panel
-- `ovhai` CLI installed
-- a Public Cloud user with `administrator` or `AI Training admin` role, see here for more information
+- access to the [OVHcloud Control Panel](https://www.ovh.com/auth/?action=gotomanager&from=https://www.ovh.co.uk/&ovhSubsidiary=GB)
+- an AI Deploy project created inside a Public Cloud project
+- a [user for AI Deploy](https://docs.ovh.com/gb/en/publiccloud/ai/users)
+- [Docker](https://www.docker.com/get-started) installed on your local computer
+- some knowledge about building image and [Dockerfile](https://docs.docker.com/engine/reference/builder/)
+- your weights obtained from training YOLOv7 model on the [ASL letters dataset](https://public.roboflow.com/object-detection/american-sign-language-letters/1) (refer to the *"Export trained weights for future inference"* part of the [notebook for YOLOv7](https://github.com/ovh/ai-training-examples/blob/main/notebooks/computer-vision/object-detection/miniconda/yolov7/notebook_object_detection_yolov7_asl.ipynb)
 
-*You will find all information on OVHcloud [documentation](https://docs.ovh.com/gb/en/publiccloud/ai/).*
+## Instructions
 
-## Create Object Storage container 
+You are going to follow different steps to build your Streamlit application.
 
-- Create the **data** container (empty): `ovhai data upload gra data-sign-language`
+- More information about Streamlit capabilities can be found [here](https://docs.streamlit.io/en/stable/).
+- Direct link to the full Python script can be found [here](https://github.com/ovh/ai-training-examples/blob/main/apps/streamlit/sign-language-recognition-yolov7-app/main.py).
 
-- Create the **model** container (empty): `ovhai data upload gra model-sign-language`
+> **Warning**
+> You must have previously created an `asl-volov7-model` Object Storage container when training your model via [AI Notebooks](https://docs.ovh.com/gb/en/publiccloud/ai/notebooks/yolov7-sign-language/).
+> 
+> Check that this container contains your **YOLOv7 custom weights**. They will be necessary for the deployment of the app!
 
-- Create the **images** container (with your own images to do detection on your future model): `ovhai data upload gra images-sign-language repo-local-my-test-images/ --remove-prefix repo-local-my-test-imagesl/`
+Here we will mainly discuss how to write the `main.py` code, the `requirements.txt` file and the `Dockerfile`. If you want to see the whole code, please refer to the [GitHub](https://github.com/ovh/ai-training-examples/tree/main/apps/streamlit/sign-language-recognition-yolov7-app) repository.
 
-## Launch an AI Notebook
+### Write the Streamlit application
 
-To launch and access to the AI Notebook, you have to launch the following command:
+Create a Python file named `main.py`.
 
-```
-ovhai notebook run miniconda jupyterlab \
-	--name notebook-yolov7-asl \
-	--framework-version conda-py39-cuda11.2-v22-4 \
-	--gpu 1 \
-	--volume data-sign-language@GRA/:/workspace/data:RW:cache \
-	--volume model-sign-language@GRA/:/workspace/asl-yolov7-model:RW \
-	--volume images-sign-language@GRA/:/workspace/images:RO \
-	--volume https://github.com/eleapttn/yolov7_streamlit_asl_recognition.git:/workspace/github-repo:RW
-```
+Inside that file, import your required modules:
 
-## Launch an AI Deploy app
-
-To launch and access to the AI Deploy app, you have to launch the following command:
-
-> First, you have to build and push your Docker image to your Docker Hub!
-
-```
-ovhai app run <your_docker_id>/yolov7-asl-recognition:latest \
-	--gpu 1 \
-	--default-http-port 8501 \
-	--volume asl-volov7-model@GRA/:/workspace/asl-volov7-model:RO
+``` {.python}
+import streamlit as st
+from PIL import Image
+import numpy as np
+import torch
+import cv2
+import io
+import os
 ```
 
-## References 
+Load the **YOLOv7** model and your own weights. Put this function it in **cache**:
 
-Access to the resources:
+```  {.python}
+@st.cache
+def load_model():
 
-- Slides are available [here](https://noti.st/eleapttn/ZuK1ot/what-if-ai-was-the-solution-to-understand-sign-language).
-- You can check the replay on this [link](https://summit2022.aiforhealth.fr/onlinesession/5c6f487b-9252-ed11-819a-000d3a45cc82).
+    custom_yolov7_model = torch.hub.load("WongKinYiu/yolov7", 'custom', '/workspace/asl-volov7-model/yolov7.pt')
+
+    return custom_yolov7_model
+```
+
+Create the inference function to get prediction:
+
+``` {.python}
+def get_prediction(img_bytes, model):
+
+    img = Image.open(io.BytesIO(img_bytes))
+    results = model(img, size=640)
+
+    return results
+```
+
+Write the image analysis function:
+
+``` {.python}
+def analyse_image(image, model):
+
+    if image is not None:
+
+        img = Image.open(image)
+        bytes_data = image.getvalue()
+        img_bytes = np.asarray(bytearray(bytes_data), dtype=np.uint8)
+        result = get_prediction(img_bytes, model)
+        result.render()
+
+        for img in result.imgs:
+            RGB_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            im_arr = cv2.imencode('.jpg', RGB_img)[1]
+            st.image(im_arr.tobytes())
+
+        result_list = list((result.pandas().xyxy[0])["name"])
+
+    else:
+        st.write("no asl letters were detected!")
+        result_list = []
+
+    return result_list
+```
+
+Define the Python function that displays the letters and forms a word:
+
+``` {.python}
+def display_letters(letters_list):
+
+    word = ''.join(letters_list)
+    path_file = "/workspace/word_file.txt"
+    with open(path_file, "a") as f:
+        f.write(word)
+
+    return path_file
+```
+
+Define the main and start your app:
+
+``` {.python}
+if __name__ == '__main__':
+
+    st.image("/workspace/head-asl-yolov7-app.png")
+    st.write("## Welcome on your ASL letters recognition app!")
+
+    model = load_model()
+
+    img_file_buffer = st.camera_input("Take your picture in real time:")
+
+    result_list = analyse_image(img_file_buffer, model)
+    path_file = display_letters(result_list)
+
+    if st.button("Clear result"):
+        if os.path.isfile(path_file):
+            os.remove(path_file)
+            print("File has been deleted")
+        else:
+            print("File does not exist")
+
+    if (os.path.exists(path_file)==True):
+        with open(path_file, "r") as f:
+            content = f.read()
+            st.write(content)
+            f.close()
+    else:
+        pass
+```
+
+### Write the requirements.txt file for the application
+
+The `requirements.txt` file will allow us to write all the modules needed to make our application work. This file will be useful when writing the `Dockerfile`.
+
+``` {.console}
+torchvision==0.14.0
+numpy==1.23.4
+pandas==1.5.1
+matplotlib==3.6.2
+pillow==9.3.0
+opencv-python-headless==4.6.0.66
+streamlit==1.14.0
+tqdm==4.64.1
+seaborn==0.12.1
+scipy==1.9.3
+ipython==8.6.0
+psutil==5.9.4
+pyyaml==6.0
+```
+
+### Write the Dockerfile for the application
+
+Your Dockerfile should start with the the `FROM` instruction indicating the parent image to use. In our case we choose to start from a `python:3.8` image:
+
+``` {.console}
+FROM python:3.8
+```
+
+Create the home directory and add your files to it:
+
+``` {.console}
+WORKDIR /workspace
+ADD . /workspace
+```
+
+Install the `requirements.txt` file which contains your needed Python modules using a `pip install ...` command:
+
+``` {.console}
+RUN pip install -r requirements.txt
+```
+
+Define your default launching command to start the application:
+
+``` {.console}
+CMD [ "streamlit" , "run" , "/workspace/main.py", "--server.address=0.0.0.0" ]
+```
+
+Give correct access rights to **ovhcloud user** (`42420:42420`):
+
+``` {.console}
+RUN chown -R 42420:42420 /workspace
+ENV HOME=/workspace
+```
+
+### Build the Docker image from the Dockerfile
+
+Launch the following command from the **Dockerfile** directory to build your application image:
+
+``` {.console}
+docker build . -t yolov7-streamlit-asl-recognition:latest
+```
+
+> **Note**
+> The dot `.` argument indicates that your build context (place of the **Dockerfile** and other needed files) is the current directory.
+
+> **Note**
+> The `-t` argument allows you to choose the identifier to give to your image. Usually image identifiers are composed of a **name** and a **version tag** `<name>:<version>`. For this example we chose **yolov7-streamlit-asl-recognition:latest**.
+
+### Push the image into the shared registry
+
+> **Warning**
+> The shared registry of AI Deploy should only be used for testing purpose. Please consider attaching your own Docker registry. More information about this can be found [here](https://docs.ovh.com/gb/en/publiccloud/ai/training/add-private-registry).
+
+Find the adress of your shared registry by launching this command:
+
+``` {.console}
+ovhai registry list
+```
+
+Login on the shared registry with your usual openstack credentials:
+
+``` {.console}
+docker login -u <user> -p <password> <shared-registry-address>
+```
+
+Push the compiled image into the shared registry:
+
+``` {.console}
+docker tag yolov7-streamlit-asl-recognition:latest <shared-registry-address>/yolov7-streamlit-asl-recognition:latest
+docker push <shared-registry-address>/yolov7-streamlit-asl-recognition:latest
+```
+
+### Launch the AI Deploy app
+
+The following command starts a new app running your Streamlit application:
+
+``` {.console}
+ovhai app run <shared-registry-address>/yolov7-streamlit-asl-recognition:latest \
+	   --gpu 1 \
+	   --default-http-port 8501 \
+	   --volume asl-volov7-model@GRA/:/workspace/asl-volov7-model:RO
+```
+
+> **Note**
+> `--default-http-port 8501` indicates that the port to reach on the app URL is the `8501`.
+
+> **Note**
+> `--gpu 1` indicates that we request 4 CPUs for that app.
+
+> **Note**
+> Consider adding the `--unsecure-http` attribute if you want your application to be reachable without any authentication.
+
+## Go further
+
+- You can imagine deploying an app using YOLO models with an other Python framework: **Flask**. Refer to this [tutorial](https://docs.ovh.com/gb/en/publiccloud/ai/deploy/web-service-yolov5/).
+- Feel free to use **Streamlit** for other AI tasks! Deploy a Speech-to-Text app [here](https://docs.ovh.com/gb/en/publiccloud/ai/deploy/tuto-streamlit-speech-to-text-app/).
