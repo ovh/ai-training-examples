@@ -257,3 +257,13 @@ ovhai app run <shared-registry-address>/tumor_seg_streamlit_app:latest \
 Please send us your questions, feedback and suggestions to improve the service:
 
 - On the OVHcloud [Discord server](https://discord.com/invite/vXVurFfwe9)
+
+#### Ideas to improve the app
+
+- Implement widgets that allow the user to indicate the paths to his dataset, model weights, and his list of test patients, rather than hard-coding them.
+
+- Implement an upload button, so the user can import his own MRI images on the app to segment them.
+
+- Implement a button to load your own model weights on the app instead of saving them in a volume.
+  
+- Implement metrics to analyze the predicted segmentation & model's performances.
