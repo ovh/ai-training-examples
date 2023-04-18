@@ -125,16 +125,3 @@ def launch_app(model):
             # Add a download figure option
             download_file(fig2, st.session_state["patient_path"], selected_plane, selected_slice)
 
-
-""" 
- Ideas to improve the app (readme): 
-
-=> Un bouton pour importer ses propres images IRM
-
-Un bouton qui permettrait de charger ses propres poids, son propre modèle, ou alors de train un nouveau modèle
-Peut-être afficher les perfs du modèle en l'évulant sur le jeu de données de test. 
-Un bouton pour download son modèle
-
-Add a compute METRICS (dice coef, ...) button between y true and y pred
-
-"""
