@@ -1,10 +1,9 @@
-import streamlit
+import streamlit as st
 from keras.layers import *
 from keras.models import *
 import keras.backend as K
 import tensorflow
 from variables import best_weights_path, IMG_SIZE
-
 
 # U-Net architecture
 def build_unet(inputs, ker_init, dropout):
@@ -92,16 +91,18 @@ def dice_coef(y_true, y_pred, smooth=1.0):
     total_loss = total_loss / class_num
     return total_loss
 
-@streamlit.cache_resource
+@st.cache_resource
 def init_model():
     """
     Model initialization and construction
     :return: Built & functional model
     """
-    input_layer = Input((IMG_SIZE, IMG_SIZE, 2))
-    model = build_unet(input_layer, 'he_normal', 0.2)
-    model.compile(loss="categorical_crossentropy", optimizer=tensorflow.keras.optimizers.Adam(learning_rate=0.001),
-                  metrics=['accuracy', tensorflow.keras.metrics.MeanIoU(num_classes=4), dice_coef, precision,
-                           sensitivity, specificity])
-    model.load_weights(best_weights_path)
-    return model
+    # Temporarily displays a spinner while loading the model
+    with st.spinner("Compiling model and loading weights..."):
+        input_layer = Input((IMG_SIZE, IMG_SIZE, 2))
+        model = build_unet(input_layer, 'he_normal', 0.2)
+        model.compile(loss="categorical_crossentropy", optimizer=tensorflow.keras.optimizers.Adam(learning_rate=0.001),
+                      metrics=['accuracy', tensorflow.keras.metrics.MeanIoU(num_classes=4), dice_coef, precision,
+                               sensitivity, specificity])
+        model.load_weights(best_weights_path)
+        return model

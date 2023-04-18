@@ -56,10 +56,12 @@ def dataset_unzip():
     target_dir = "/workspace/brats20-dataset-training-validation"
     # /workspace/BraTS2020_zip_dataset/brats20-dataset-training-validation/BraTS2020_TrainingData/MICCAI_BraTS2020_TrainingData
 
-    # Check if target_dir already exists (already unzipped from a previous run)
-    if not os.path.exists(target_dir):
-        with zipfile.ZipFile(path_to_zip_file, 'r') as zip_ref:
-            zip_ref.extractall(target_dir)
+    # Temporarily displays a spinner while unzipping the dataset
+    with st.spinner("Unzipping dataset..."):
+        # Check if target_dir already exists (already unzipped from a previous run)
+        if not os.path.exists(target_dir):
+            with zipfile.ZipFile(path_to_zip_file, 'r') as zip_ref:
+                zip_ref.extractall(target_dir)
 
 
 def rename_wrong_file(dataset_path):
