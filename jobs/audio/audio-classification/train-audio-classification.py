@@ -12,12 +12,12 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 
 ########################################################################################################################################################
-# The goal of this script is to train a pre-construct modele to recognize marin mamal sound.                                                           #
+# The goal of this script is to train a pre-construct model to recognize marine mammal sound.                                                          #
 # See the Notebook "notebook-marine-sound-classification" in the ai-training-examples for                                                              #
 # more details : https://github.com/ovh/ai-training-examples/blob/main/notebooks/audio/audio-classification/notebook-marine-sound-classification.ipynb #
-# You must mount 2 volumes for the data and the modele (the same used for the Notebook for example 😉) :                                               #
+# You must mount 2 volumes for the data and the model (the same used for the Notebook for example 😉) :                                                #
 #   - /workspace/saved_model where the model is stored                                                                                                 #
-#   - /workspace/data where store the data for thetraining                                                                                             #
+#   - /workspace/data where store the data for the training                                                                                            #
 ########################################################################################################################################################
 
 
@@ -43,7 +43,7 @@ print("X:", X)
 # ⚗️ Create training and validation sets
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size = 0.2)
 
-# 🧠 Load the pretrained model 
+# 🧠 Load the pre-trained model 
 model = load_model('/workspace/saved_model/my_model')
 print(model.summary())
 
