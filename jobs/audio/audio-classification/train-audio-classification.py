@@ -71,7 +71,7 @@ print('Model tracking')
 log_dir = "/workspace/saved_model/runs/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
 
-model.fit(X_train, y_train, validation_data = (X_val, y_val), epochs = 100, batch_size = 128, callbacks = [tensorboard_callback]))
+model.fit(X_train, y_train, validation_data = (X_val, y_val), epochs = 100, batch_size = 128, callbacks = [tensorboard_callback])
 
 # 💿 Save the model for future usages
 model.save('/workspace/saved_model/my_model2')
