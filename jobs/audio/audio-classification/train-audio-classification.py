@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import datetime
 
 # preprocessing
 from sklearn.preprocessing import LabelEncoder
@@ -43,15 +44,35 @@ print("X:", X)
 # ⚗️ Create training and validation sets
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size = 0.2)
 
-# 🧠 Load the pre-trained model 
-model = load_model('/workspace/saved_model/my_model')
+# 🧠 Define model architecture
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Dense(512, activation='relu', input_shape=(X_train.shape[1],)),
+    tf.keras.layers.Dropout(0.2),
+
+    tf.keras.layers.Dense(256, activation='relu'),
+    keras.layers.Dropout(0.2),
+
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dropout(0.2),
+
+    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dropout(0.2),
+
+    tf.keras.layers.Dense(45, activation='softmax'),
+])
+
 print(model.summary())
 
 # 💪 Train the model with data
 model.compile(optimizer = 'adam', loss = 'sparse_categorical_crossentropy', metrics = 'accuracy')
-batch_size = 128
-model.fit(X_train, y_train, validation_data = (X_val, y_val), epochs = 100, batch_size = batch_size)
 
-# 💿 Save the model for futur usages
+# 📈 Add the TensorBoard callback
+print('Model tracking')
+log_dir = "/workspace/saved_model/runs/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+
+model.fit(X_train, y_train, validation_data = (X_val, y_val), epochs = 100, batch_size = 128, callbacks = [tensorboard_callback]))
+
+# 💿 Save the model for future usages
 model.save('/workspace/saved_model/my_model2')
 print('End of training')
