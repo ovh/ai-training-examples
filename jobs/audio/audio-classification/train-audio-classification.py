@@ -8,9 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
 # model
-from keras.models import load_model
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
 
 ########################################################################################################################################################
 # The goal of this script is to train a pre-construct model to recognize marine mammal sound.                                                          #
@@ -18,12 +16,12 @@ from tensorflow.keras.models import Sequential
 # more details : https://github.com/ovh/ai-training-examples/blob/main/notebooks/audio/audio-classification/notebook-marine-sound-classification.ipynb #
 # You must mount 2 volumes for the data and the model (the same used for the Notebook for example 😉) :                                                #
 #   - /workspace/saved_model where the model is stored                                                                                                 #
-#   - /workspace/data where store the data for the training                                                                                            #
+#   - /workspace/data/csv where store the data for the training                                                                                            #
 ########################################################################################################################################################
 
 
 # 🗃 Load pre-transform data
-df = pd.read_csv('/workspace/data/data.csv')
+df = pd.read_csv('./csv/data.csv')
 # dataframe shape
 df.shape
 # dataframe types
@@ -50,7 +48,7 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Dropout(0.2),
 
     tf.keras.layers.Dense(256, activation='relu'),
-    keras.layers.Dropout(0.2),
+    tf.keras.layers.Dropout(0.2),
 
     tf.keras.layers.Dense(128, activation='relu'),
     tf.keras.layers.Dropout(0.2),
