@@ -87,7 +87,7 @@ def classification(dataframe):
     X_test = scaler.transform(np.array(dataframe.iloc[:, 1:27]))
 
     # load the pretrained model
-    model = load_model('saved_model/my_model')
+    model = load_model('saved_model/my_model2')
     
     # generate predictions for test samples
     predictions = model.predict(X_test)
