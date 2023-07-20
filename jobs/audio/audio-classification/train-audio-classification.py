@@ -21,7 +21,7 @@ import tensorflow as tf
 
 
 # 🗃 Load pre-transform data
-df = pd.read_csv('/workspace/data/csv/data.csv')
+df = pd.read_csv('/workspace/data/data.csv')
 # dataframe shape
 df.shape
 # dataframe types
