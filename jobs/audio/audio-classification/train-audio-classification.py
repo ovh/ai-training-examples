@@ -16,12 +16,12 @@ import tensorflow as tf
 # more details : https://github.com/ovh/ai-training-examples/blob/main/notebooks/audio/audio-classification/notebook-marine-sound-classification.ipynb #
 # You must mount 2 volumes for the data and the model (the same used for the Notebook for example 😉) :                                                #
 #   - /workspace/saved_model where the model is stored                                                                                                 #
-#   - /workspace/data/ where store the data for the training                                                                                            #
+#   - /workspace/data/csv/ where store the data for the training                                                                                       #
 ########################################################################################################################################################
 
 
 # 🗃 Load pre-transform data
-df = pd.read_csv('/workspace/data/data.csv')
+df = pd.read_csv('/workspace/data/csv/data.csv')
 # dataframe shape
 df.shape
 # dataframe types
