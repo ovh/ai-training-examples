@@ -16,12 +16,12 @@ import tensorflow as tf
 # more details : https://github.com/ovh/ai-training-examples/blob/main/notebooks/audio/audio-classification/notebook-marine-sound-classification.ipynb #
 # You must mount 2 volumes for the data and the model (the same used for the Notebook for example 😉) :                                                #
 #   - /workspace/saved_model where the model is stored                                                                                                 #
-#   - /workspace/data/csv where store the data for the training                                                                                            #
+#   - /workspace/data/ where store the data for the training                                                                                            #
 ########################################################################################################################################################
 
 
 # 🗃 Load pre-transform data
-df = pd.read_csv('./csv/data.csv')
+df = pd.read_csv('/workspace/data/data.csv')
 # dataframe shape
 df.shape
 # dataframe types
@@ -64,7 +64,7 @@ print(model.summary())
 # 💪 Train the model with data
 model.compile(optimizer = 'adam', loss = 'sparse_categorical_crossentropy', metrics = 'accuracy')
 
-# 📈 Add the TensorBoard callback
+# 📈 Add the TensorBoard callback (optional)
 print('Model tracking')
 log_dir = "/workspace/saved_model/runs/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
