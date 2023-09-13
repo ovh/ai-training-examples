@@ -48,7 +48,7 @@ We are going to follow different steps to deploy our **LLaMA 2 chatbot applicati
 - **Push the image into a registry.**
 - **Deploy the app**.
 
-*If you have cloned the [app's repository](https://github.com/ovh/ai-training-examples/tree/main/apps/streamlit/image-segmentation-brain-tumors), you will not need to rewrite the files (`requirements.txt` and `Dockerfile`) since you already have them. In this case, you can go directly to the "Build the Docker image" step, even if it is better to understand the global process.*
+*If you have cloned this repository, you will not need to rewrite the files (`requirements.txt` and `Dockerfile`) since you already have them. In this case, you can go directly to the "Build the Docker image" step, even if it is better to understand the global process.*
 
 
 ### Write the requirements.txt file for the application
