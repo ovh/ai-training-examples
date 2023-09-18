@@ -919,14 +919,14 @@ def transcribe_audio_part(filename, stt_model, stt_tokenizer, myaudio, sub_start
     try:
         with torch.no_grad():
             new_audio = myaudio[sub_start:sub_end]  # Works in milliseconds
-            path = filename[:-3] + "audio_" + str(index) + ".mp3"
-            new_audio.export(path)  # Exports to a mp3 file in the current path
+            path = filename[:-3] + "audio_" + str(index) + ".wav"
+            new_audio.export(path)  # Exports to a wav file in the current path
 
             # Load audio file with librosa, set sound rate to 16000 Hz because the model we use was trained on 16000 Hz data
             input_audio, _ = librosa.load(path, sr=16000)
 
             # return PyTorch torch.Tensor instead of a list of python integers thanks to return_tensors = ‘pt’
-            input_values = stt_tokenizer(input_audio, return_tensors="pt").to(device).input_values
+            input_values = stt_tokenizer(input_audio, sampling_rate=16000, return_tensors="pt").to(device).input_values
 
             # Get logits from the data structure containing all the information returned by the model and get our prediction
             logits = stt_model.to(device)(input_values).logits

@@ -1,0 +1,4 @@
+kaggle
+matplotlib==3.7.2
+torchvision==0.15.2
+Pillow==10.0.0

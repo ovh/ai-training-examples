@@ -1,0 +1,8 @@
+torch
+accelerate @ git+https://github.com/huggingface/accelerate.git
+bitsandbytes
+datasets==2.13.1
+transformers @ git+https://github.com/huggingface/transformers.git
+peft @ git+https://github.com/huggingface/peft.git
+trl @ git+https://github.com/lvwerra/trl.git
+scipy
