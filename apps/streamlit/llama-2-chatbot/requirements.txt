@@ -1,0 +1,4 @@
+streamlit==1.26.0
+torch
+transformers==4.33.1
+tokenizers==0.13.3
