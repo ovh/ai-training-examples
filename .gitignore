@@ -3,3 +3,4 @@
 .idea
 jobs/audio/audio-classification/ai-tuto/
 csv/
+.vscode/settings.json
