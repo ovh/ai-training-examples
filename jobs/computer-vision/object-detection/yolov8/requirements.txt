@@ -1,2 +1,2 @@
-ultralytics
-opencv-python-headless
+ultralytics==8.0.175
+opencv-python-headless==4.8.0.76
