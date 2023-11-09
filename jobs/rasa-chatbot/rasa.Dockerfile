@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM tensorflow/tensorflow:2.12.0-gpu
 
 WORKDIR /workspace
 ADD . /workspace
