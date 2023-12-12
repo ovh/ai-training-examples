@@ -53,7 +53,7 @@ def main():
     audio_file = st.file_uploader("Upload an audio file", type=["mp3", "wav"])
                                                                                                                                     
     transcript = {"text": "The audio file could not be transcribed :("}     
-    options = dict(language="French", beam_size=5, best_of=5)                 
+    options = dict(beam_size=5, best_of=5)                 
     transcribe_options = dict(task="transcribe", **options)          
                                                                      
     # Audio player                                                   
