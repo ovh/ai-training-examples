@@ -1,4 +1,4 @@
-#AI Deploy - Tutorial - Deploy an ONNX model using FastAPI
+# AI Deploy - Tutorial - Deploy an ONNX model using FastAPI
 
 ## Objective
 
