@@ -12,7 +12,8 @@ RUN apt-get update && \
 WORKDIR /workspace
 
 # 📥 Download the webui.sh script from the specified URL
-RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh
+# commit 3e068de has been done 19/12/2023 - date of tutorial writing
+RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/3e068de/webui.sh
 
 # 👮‍♀️ Make the webui.sh script executable
 RUN chmod +x webui.sh
