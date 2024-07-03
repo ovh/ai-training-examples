@@ -105,6 +105,8 @@ ovhai datastore add s3 NEURALANGELO <s3_endpoint_url> <s3_region> <s3_access_key
 >
 > Using `--store-credentials-locally` is needed here to be able to push/pull data from a bucket, using ovhai CLI in the next steps.
 >
+> See [this page](https://help.ovhcloud.com/csm/en-gb-public-cloud-ai-s3-compliance?id=kb_article_view&sysparm_article=KB0058011) for help about S3 usage.
+>
 
 ### Prepare model input using COLMAP
 
