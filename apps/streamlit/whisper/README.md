@@ -108,7 +108,7 @@ You can create your Object Storage bucket using either the UI (OVHcloud Control 
 >>
 >> *`GRA` alias and `whisper-model` will be used in this tutorial.*
 >>
->> For your information, the previous command is applicable to both Swift and S3 buckets. However, it's important to note that for S3 usage, a proper configuration is necessary. If S3 is not configured yet and you wish to use it, please read the [S3 compliance guide](/pages/public_cloud/ai_machine_learning/gi_08_s3_compliance).
+>> For your information, the previous command is applicable to both Swift and S3* compatible Object Storage buckets. However, it's important to note that for S3 compatible usage, a proper configuration is necessary. If S3 compatible is not configured yet and you wish to use it, please read the [S3 compatible compliance guide](/pages/public_cloud/ai_machine_learning/gi_08_s3_compliance).
 
 #### Download whisper in the created bucket
 
@@ -313,3 +313,5 @@ If you need training or technical assistance to implement our solutions, contact
 Please send us your questions, feedback and suggestions to improve the service:
 
 - On the OVHcloud [Discord server](https://discord.com/invite/vXVurFfwe9)
+
+**\***: S3 is a trademark of Amazon Technologies, Inc. OVHcloud’s service is not sponsored by, endorsed by, or otherwise affiliated with Amazon Technologies, Inc.

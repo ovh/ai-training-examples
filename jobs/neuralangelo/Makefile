@@ -7,7 +7,7 @@ OUTPUT_DIR := logs/$(GROUP)/$(MODEL)
 DOWNSAMPLE_RATE ?= 2
 SCENE_TYPE      ?= object
 
-# S3 config
+# S3* compatible config
 DATASTORE   ?= NEURALANGELO
 BUCKET_NAME := neuralangelo-$(shell whoami)-$(MODEL)
 BUCKET      := $(BUCKET_NAME)@$(DATASTORE)
