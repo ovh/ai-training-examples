@@ -2,7 +2,7 @@ torchvision==0.14.0
 numpy==1.23.4
 pandas==1.5.1
 matplotlib==3.6.2
-pillow==9.3.0
+pillow==13.0.0
 opencv-python-headless==4.6.0.66
 streamlit==1.14.0
 tqdm==4.64.1
