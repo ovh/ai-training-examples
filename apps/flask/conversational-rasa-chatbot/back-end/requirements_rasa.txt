@@ -59,7 +59,7 @@ Markdown==3.4.1
 MarkupSafe==2.1.1
 matplotlib==3.3.4
 mattermostwrapper==2.2
-msgpack==1.0.4
+msgpack==1.2.3
 multidict==5.2.0
 networkx==2.6.3
 numpy==1.19.5
