@@ -4,6 +4,6 @@ fastapi==0.103.1
 python-multipart==0.0.6
 torch==2.0.1
 torchvision==0.15.2
-onnx==1.14.1
+onnx==1.22.0
 onnxruntime==1.15.1
 pillow==10.0.0
