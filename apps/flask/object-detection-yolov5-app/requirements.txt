@@ -1,5 +1,5 @@
 Flask==2.1.0
-torch==1.13.1
+torch==2.13.0
 torchvision==0.14.1
 psutil==5.9.4
 IPython==8.8.0
